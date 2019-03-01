@@ -16,6 +16,9 @@ All B4v21 versions have differences to the vanilla game, here they are:
 * Script_CustomMS - Replaces the master server with the B4v21 custom master server.
 * System_ReturnToBlockland - (given by Polarity!) v19 version of RTB, with working IRC, addon manager, prefs, etc.
 * System_oRBs - A edited version of RTB 4.0 made after the closure of RTB. Designed to run on v21 but works fine on v20.
+* Colorset_Trader (Color Set a la Trader) - A colorset that was popular back in RTB2 and is Chazpelo's go-to-colorset.
+* Tool_Fill_Can
+* Tool_NewDuplicator
 
 There's also some additional client add-ons included, which adds essential features to the game. If you want a 'stock' experience, just delete all 'Client_' add-ons.
 
