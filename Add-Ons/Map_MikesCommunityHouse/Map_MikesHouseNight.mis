@@ -922,7 +922,7 @@ function GSFFanItem::onAdd(%this,%obj)
 new SimGroup(MissionGroup) {
 
    new ScriptObject(MissionInfo) {
-         name = "Mikes House-Night";
+         name = "Mikes Community House Night";
          saveName = "Mikes_House";
    };
    new MissionArea(MissionArea) {
