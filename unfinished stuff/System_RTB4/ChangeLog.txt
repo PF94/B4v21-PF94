@@ -1,0 +1,22 @@
+Version 4.15
+
+- Major update to register prefs, you should update this on your servers to ensure proper Pref syncing between you and your server
+
+Version 4.14
+
+- Minor improvements to Gui and server commands
+
+Version 4.13
+
+- Fixes for mod manager and logins
+
+Version 4.12
+
+- oRBs update brings you, a functionnal mod manager!
+
+Version 4.10
+
+- oRBs update for info
+- oRBs update icons set
+
+x
