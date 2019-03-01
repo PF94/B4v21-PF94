@@ -1,0 +1,2075 @@
+$DamageLava       = 0.01;
+$DamageHotLava    = 0.01;
+$DamageCrustyLava = 10.0;
+
+datablock TriggerData(StoveTrigger) 
+{ 
+    tickPeriodMS = 100; 
+}; 
+ 
+datablock TriggerData(StoveTrigger) 
+{ 
+    tickPeriodMS = 100; 
+}; 
+ 
+function StoveTrigger::onEnterTrigger( %this, %trigger, %obj ) 
+{ 
+   if (!%obj.client) 
+      return; 
+   %messageArray[0] = "\c2" @ %obj.client.name @ " got burned!"; 
+   %messageArray[1] = "\c2" @ " Who turned on the stove?!"; 
+   %messageArray[2] = "\c2" @ %obj.client.name @ " turned into melted plastic."; 
+   %messageArray[3] = "\c2" @ %obj.client.name @ " forgot the stove was on."; 
+   %messageArray[4] = "\c2" @ %obj.client.name @ ", would you like some cheese with your Paz-own??"; 
+   %messageArray[5] = "\c2" @ %obj.client.name @ " picked a fight with the stove and lost.";  
+ 
+   messageAll('SomeDumarseFellIntoTheGrill', %messageArray[getRandom(0,5)]); 
+   %obj.kill(); 
+}
+datablock ParticleData(GSFfaucetParticle)
+{
+	windCoefficient		= 0;
+	dragCoefficient		= 3;
+	gravityCoefficient		= 1.0;
+	inheritedVelFactor		= 0.0;
+	constantAcceleration	= 0.0;
+	lifetimeMS		= 1000;
+	lifetimeVarianceMS		= 400;
+	textureName		= "./GSFfaucet";
+	spinSpeed		= 0.0;
+	spinRandomMin		= -90.0;
+	spinRandomMax		= 90.0;
+	colors[0]			= "1 1 0.5 1";
+	colors[1]			= "1 1 0.0 1";
+	colors[2]			= "1 0 0 0";
+	sizes[0]			= 0.6;
+	sizes[1] 			= 0.8;
+	sizes[2]			= 0.0;
+	times[0] 			= 0;
+	times[1] 			= 0.5;
+	times[2] 			= 1.0;
+};
+datablock ParticleEmitterData(GSFfaucetEmitter)
+{
+	ejectionPeriodMS 		= 1;
+	periodVarianceMS 		= 0;
+	ejectionVelocity 		= 40;
+	velocityVariance 		= 5;
+	ejectionOffset		= 0;
+	thetaMin			= 0;
+	thetaMax			= 0;
+	phiReferenceVel  		= 0;
+	phiVariance		= 360;
+	overrideAdvance 		= false;
+	particles 			= "GSFfaucetParticle";
+
+	useEmitterColors 		= 1;
+
+	uiName			= "GSF faucet";
+};
+datablock WheeledVehicleData(PictureFrame)
+{
+	category = "Vehicles";
+	displayName = " ";
+	shapeFile = "./pframe.dts"; 
+	emap = true;
+	minMountDist = 3;
+   
+   numMountPoints = 0;
+   mountThread[0] = "sit";
+   mountThread[1] = "sit";
+   mountThread[2] = "sit";
+   mountThread[3] = "sit";
+   mountThread[4] = "sit";
+   mountThread[5] = "sit";
+   mountThread[6] = "sit";
+   mountThread[7] = "sit";
+
+	maxDamage = 999999.00;
+	destroyedLevel = 200.00;
+	energyPerDamagePoint = 160;
+	speedDamageScale = 1.04;
+	collDamageThresholdVel = 20.0;
+	collDamageMultiplier   = 0.02;
+
+	massCenter = "0 0 0";
+   massBox = "3 3 3";
+
+	maxSteeringAngle = 0.9785;  // Maximum steering angle, should match animation
+	integration = 4;           // Force integration time: TickSec/Rate
+	//tireEmitter = TireEmitter; // All the tires use the same dust emitter
+
+	// 3rd person camera settings
+	cameraRoll = false;         // Roll the camera with the vehicle
+	cameraMaxDist = 13;         // Far distance from vehicle
+	cameraOffset = 7.5;        // Vertical offset from camera mount point
+	cameraLag = 0.0;           // Velocity lag of camera
+	cameraDecay = 0.75;        // Decay per sec. rate of velocity lag
+	cameraTilt = 0.4;
+   collisionTol = 0.1;        // Collision distance tolerance
+   contactTol = 0.1;
+
+	useEyePoint = false;	
+
+	//defaultTire	 = jeepTire;
+	//defaultSpring = jeepSpring;
+	//flatTire	    = jeepFlatTire;
+	//flatSpring	 = jeepFlatSpring;
+
+   numWheels = 0;
+
+	// Rigid Body
+	mass = 200;
+	density = 5.0;
+	drag = 0.6;
+	bodyFriction = 0.6;
+	bodyRestitution = 0.6;
+	minImpactSpeed = 10;        // Impacts over this invoke the script callback
+	softImpactSpeed = 10;       // Play SoftImpact Sound
+	hardImpactSpeed = 15;      // Play HardImpact Sound
+	groundImpactMinSpeed    = 10.0;
+
+	// Engine
+	engineTorque = 12000; //4000;       // Engine power
+	engineBrake = 2000;         // Braking when throttle is 0
+	brakeTorque = 4000;        // When brakes are applied
+	maxWheelSpeed = 20;        // Engine scale by current speed / max speed
+
+	// Energy
+	maxEnergy = 100;
+	jetForce = 3000;
+	minJetEnergy = 30;
+	jetEnergyDrain = 2;
+
+   isSled = false;
+
+   forwardThrust		= 3000;
+	reverseThrust		= 2000;
+	lift			= 100;
+	maxForwardVel		= 40;
+	maxReverseVel		= 40;
+	horizontalSurfaceForce	= 0;   // Horizontal center "wing" (provides "bite" into the wind for climbing/diving and turning)
+	verticalSurfaceForce	= 0; 
+	rollForce		= 4000;
+	yawForce		= 6000;
+	pitchForce		= 6000;
+	rotationalDrag		= 0.15;
+	stallSpeed		= 10;
+
+	splash = vehicleSplash;
+	splashVelocity = 4.0;
+	splashAngle = 67.0;
+	splashFreqMod = 300.0;
+	splashVelEpsilon = 0.60;
+	bubbleEmitTime = 1.4;
+	splashEmitter[0] = vehicleFoamDropletsEmitter;
+	splashEmitter[1] = vehicleFoamEmitter;
+	splashEmitter[2] = vehicleBubbleEmitter;
+	mediumSplashSoundVelocity = 10.0;   
+	hardSplashSoundVelocity = 20.0;   
+	exitSplashSoundVelocity = 5.0;
+		
+	//mediumSplashSound = "";
+	//hardSplashSound = "";
+	//exitSplashSound = "";
+	
+	// Sounds
+	//   jetSound = ScoutThrustSound;
+	//engineSound = idleSound;
+	//squealSound = skidSound;
+	softImpactSound = slowImpactSound;
+	hardImpactSound = fastImpactSound;
+	//wheelImpactSound = slowImpactSound;
+
+	//   explosion = VehicleExplosion;
+	justcollided = 0;
+
+   uiName = "GSF PictureFrame ";
+	rideable = true;
+		lookUpLimit = 0.65;
+		lookDownLimit = 0.45;
+
+	paintable = true;
+   
+   damageEmitter[0] = vehicleBurnEmitter;
+	damageEmitterOffset[0] = "0.0 0.0 0.0 ";
+	damageLevelTolerance[0] = 0.99;
+
+   damageEmitter[1] = vehicleBurnEmitter;
+	damageEmitterOffset[1] = "0.0 0.0 0.0 ";
+	damageLevelTolerance[1] = 1.0;
+
+   numDmgEmitterAreas = 1;
+
+   initialExplosionProjectile = vehicleExplosionProjectile;
+   initialExplosionOffset = 0;         //offset only uses a z value for now
+
+   burnTime = 4000;
+
+   finalExplosionProjectile = vehicleFinalExplosionProjectile;
+   finalExplosionOffset = 0.5;          //offset only uses a z value for now
+
+   minRunOverSpeed    = 2;   //how fast you need to be going to run someone over (do damage)
+   runOverDamageScale = 5;   //when you run over someone, speed * runoverdamagescale = damage amt
+   runOverPushScale   = 1.2; //how hard a person you're running over gets pushed
+};
+datablock WheeledVehicleData(Cheese)
+{
+	category = "Vehicles";
+	displayName = " ";
+	shapeFile = "./cheese.dts"; 
+	emap = true;
+	minMountDist = 3;
+   
+   numMountPoints = 0;
+   mountThread[0] = "sit";
+   mountThread[1] = "sit";
+   mountThread[2] = "sit";
+   mountThread[3] = "sit";
+   mountThread[4] = "sit";
+   mountThread[5] = "sit";
+   mountThread[6] = "sit";
+   mountThread[7] = "sit";
+
+	maxDamage = 999999.00;
+	destroyedLevel = 200.00;
+	energyPerDamagePoint = 160;
+	speedDamageScale = 1.04;
+	collDamageThresholdVel = 20.0;
+	collDamageMultiplier   = 0.02;
+
+	massCenter = "0 0 0";
+   massBox = "3 3 3";
+
+	maxSteeringAngle = 0.9785;  // Maximum steering angle, should match animation
+	integration = 4;           // Force integration time: TickSec/Rate
+	//tireEmitter = TireEmitter; // All the tires use the same dust emitter
+
+	// 3rd person camera settings
+	cameraRoll = false;         // Roll the camera with the vehicle
+	cameraMaxDist = 13;         // Far distance from vehicle
+	cameraOffset = 7.5;        // Vertical offset from camera mount point
+	cameraLag = 0.0;           // Velocity lag of camera
+	cameraDecay = 0.75;        // Decay per sec. rate of velocity lag
+	cameraTilt = 0.4;
+   collisionTol = 0.1;        // Collision distance tolerance
+   contactTol = 0.1;
+
+	useEyePoint = false;	
+
+	//defaultTire	 = jeepTire;
+	//defaultSpring = jeepSpring;
+	//flatTire	    = jeepFlatTire;
+	//flatSpring	 = jeepFlatSpring;
+
+   numWheels = 0;
+
+	// Rigid Body
+	mass = 200;
+	density = 5.0;
+	drag = 0.6;
+	bodyFriction = 0.6;
+	bodyRestitution = 0.6;
+	minImpactSpeed = 10;        // Impacts over this invoke the script callback
+	softImpactSpeed = 10;       // Play SoftImpact Sound
+	hardImpactSpeed = 15;      // Play HardImpact Sound
+	groundImpactMinSpeed    = 10.0;
+
+	// Engine
+	engineTorque = 12000; //4000;       // Engine power
+	engineBrake = 2000;         // Braking when throttle is 0
+	brakeTorque = 4000;        // When brakes are applied
+	maxWheelSpeed = 20;        // Engine scale by current speed / max speed
+
+	// Energy
+	maxEnergy = 100;
+	jetForce = 3000;
+	minJetEnergy = 30;
+	jetEnergyDrain = 2;
+
+   isSled = false;
+
+   forwardThrust		= 3000;
+	reverseThrust		= 2000;
+	lift			= 100;
+	maxForwardVel		= 40;
+	maxReverseVel		= 40;
+	horizontalSurfaceForce	= 0;   // Horizontal center "wing" (provides "bite" into the wind for climbing/diving and turning)
+	verticalSurfaceForce	= 0; 
+	rollForce		= 4000;
+	yawForce		= 6000;
+	pitchForce		= 6000;
+	rotationalDrag		= 0.15;
+	stallSpeed		= 10;
+
+	splash = vehicleSplash;
+	splashVelocity = 4.0;
+	splashAngle = 67.0;
+	splashFreqMod = 300.0;
+	splashVelEpsilon = 0.60;
+	bubbleEmitTime = 1.4;
+	splashEmitter[0] = vehicleFoamDropletsEmitter;
+	splashEmitter[1] = vehicleFoamEmitter;
+	splashEmitter[2] = vehicleBubbleEmitter;
+	mediumSplashSoundVelocity = 10.0;   
+	hardSplashSoundVelocity = 20.0;   
+	exitSplashSoundVelocity = 5.0;
+		
+	//mediumSplashSound = "";
+	//hardSplashSound = "";
+	//exitSplashSound = "";
+	
+	// Sounds
+	//   jetSound = ScoutThrustSound;
+	//engineSound = idleSound;
+	//squealSound = skidSound;
+	softImpactSound = slowImpactSound;
+	hardImpactSound = fastImpactSound;
+	//wheelImpactSound = slowImpactSound;
+
+	//   explosion = VehicleExplosion;
+	justcollided = 0;
+
+   uiName = "GSF Cheese ";
+	rideable = true;
+		lookUpLimit = 0.65;
+		lookDownLimit = 0.45;
+
+	paintable = true;
+   
+   damageEmitter[0] = vehicleBurnEmitter;
+	damageEmitterOffset[0] = "0.0 0.0 0.0 ";
+	damageLevelTolerance[0] = 0.99;
+
+   damageEmitter[1] = vehicleBurnEmitter;
+	damageEmitterOffset[1] = "0.0 0.0 0.0 ";
+	damageLevelTolerance[1] = 1.0;
+
+   numDmgEmitterAreas = 1;
+
+   initialExplosionProjectile = vehicleExplosionProjectile;
+   initialExplosionOffset = 0;         //offset only uses a z value for now
+
+   burnTime = 4000;
+
+   finalExplosionProjectile = vehicleFinalExplosionProjectile;
+   finalExplosionOffset = 0.5;          //offset only uses a z value for now
+
+   minRunOverSpeed    = 2;   //how fast you need to be going to run someone over (do damage)
+   runOverDamageScale = 5;   //when you run over someone, speed * runoverdamagescale = damage amt
+   runOverPushScale   = 1.2; //how hard a person you're running over gets pushed
+};
+datablock WheeledVehicleData(GSFball)
+{
+	category = "Vehicles";
+	displayName = " ";
+	shapeFile = "./gsfball.dts"; 
+	emap = true;
+	minMountDist = 3;
+   
+   numMountPoints = 0;
+   mountThread[0] = "sit";
+   mountThread[1] = "sit";
+   mountThread[2] = "sit";
+   mountThread[3] = "sit";
+   mountThread[4] = "sit";
+   mountThread[5] = "sit";
+   mountThread[6] = "sit";
+   mountThread[7] = "sit";
+
+	maxDamage = 999999.00;
+	destroyedLevel = 200.00;
+	energyPerDamagePoint = 160;
+	speedDamageScale = 1.04;
+	collDamageThresholdVel = 20.0;
+	collDamageMultiplier   = 0.02;
+
+	massCenter = "0 0 0";
+   massBox = "5 5 5";
+
+	maxSteeringAngle = 0.9785;  // Maximum steering angle, should match animation
+	integration = 4;           // Force integration time: TickSec/Rate
+	//tireEmitter = TireEmitter; // All the tires use the same dust emitter
+
+	// 3rd person camera settings
+	cameraRoll = false;         // Roll the camera with the vehicle
+	cameraMaxDist = 13;         // Far distance from vehicle
+	cameraOffset = 7.5;        // Vertical offset from camera mount point
+	cameraLag = 0.0;           // Velocity lag of camera
+	cameraDecay = 0.75;        // Decay per sec. rate of velocity lag
+	cameraTilt = 0.4;
+   collisionTol = 0.1;        // Collision distance tolerance
+   contactTol = 0.1;
+
+	useEyePoint = false;	
+
+	//defaultTire	 = jeepTire;
+	//defaultSpring = jeepSpring;
+	//flatTire	    = jeepFlatTire;
+	//flatSpring	 = jeepFlatSpring;
+
+   numWheels = 0;
+
+	// Rigid Body
+	mass = 200;
+	density = 5.0;
+	drag = 0.6;
+	bodyFriction = 0.6;
+	bodyRestitution = 0.6;
+	minImpactSpeed = 10;        // Impacts over this invoke the script callback
+	softImpactSpeed = 10;       // Play SoftImpact Sound
+	hardImpactSpeed = 15;      // Play HardImpact Sound
+	groundImpactMinSpeed    = 10.0;
+
+	// Engine
+	engineTorque = 12000; //4000;       // Engine power
+	engineBrake = 2000;         // Braking when throttle is 0
+	brakeTorque = 4000;        // When brakes are applied
+	maxWheelSpeed = 20;        // Engine scale by current speed / max speed
+
+	// Energy
+	maxEnergy = 100;
+	jetForce = 3000;
+	minJetEnergy = 30;
+	jetEnergyDrain = 2;
+
+   isSled = false;
+
+   forwardThrust		= 3000;
+	reverseThrust		= 2000;
+	lift			= 100;
+	maxForwardVel		= 40;
+	maxReverseVel		= 40;
+	horizontalSurfaceForce	= 0;   // Horizontal center "wing" (provides "bite" into the wind for climbing/diving and turning)
+	verticalSurfaceForce	= 0; 
+	rollForce		= 4000;
+	yawForce		= 6000;
+	pitchForce		= 6000;
+	rotationalDrag		= 0.15;
+	stallSpeed		= 10;
+
+	splash = vehicleSplash;
+	splashVelocity = 4.0;
+	splashAngle = 67.0;
+	splashFreqMod = 300.0;
+	splashVelEpsilon = 0.60;
+	bubbleEmitTime = 1.4;
+	splashEmitter[0] = vehicleFoamDropletsEmitter;
+	splashEmitter[1] = vehicleFoamEmitter;
+	splashEmitter[2] = vehicleBubbleEmitter;
+	mediumSplashSoundVelocity = 10.0;   
+	hardSplashSoundVelocity = 20.0;   
+	exitSplashSoundVelocity = 5.0;
+		
+	//mediumSplashSound = "";
+	//hardSplashSound = "";
+	//exitSplashSound = "";
+	
+	// Sounds
+	//   jetSound = ScoutThrustSound;
+	//engineSound = idleSound;
+	//squealSound = skidSound;
+	softImpactSound = slowImpactSound;
+	hardImpactSound = fastImpactSound;
+	//wheelImpactSound = slowImpactSound;
+
+	//   explosion = VehicleExplosion;
+	justcollided = 0;
+
+   uiName = "GSF Ball ";
+	rideable = true;
+		lookUpLimit = 0.65;
+		lookDownLimit = 0.45;
+
+	paintable = true;
+   
+   damageEmitter[0] = vehicleBurnEmitter;
+	damageEmitterOffset[0] = "0.0 0.0 0.0 ";
+	damageLevelTolerance[0] = 0.99;
+
+   damageEmitter[1] = vehicleBurnEmitter;
+	damageEmitterOffset[1] = "0.0 0.0 0.0 ";
+	damageLevelTolerance[1] = 1.0;
+
+   numDmgEmitterAreas = 1;
+
+   initialExplosionProjectile = vehicleExplosionProjectile;
+   initialExplosionOffset = 0;         //offset only uses a z value for now
+
+   burnTime = 4000;
+
+   finalExplosionProjectile = vehicleFinalExplosionProjectile;
+   finalExplosionOffset = 0.5;          //offset only uses a z value for now
+
+   minRunOverSpeed    = 2;   //how fast you need to be going to run someone over (do damage)
+   runOverDamageScale = 5;   //when you run over someone, speed * runoverdamagescale = damage amt
+   runOverPushScale   = 1.2; //how hard a person you're running over gets pushed
+};
+datablock WheeledVehicleData(CerealBox)
+{
+	category = "Vehicles";
+	displayName = " ";
+	shapeFile = "./cerealbox.dts"; 
+	emap = true;
+	minMountDist = 3;
+   
+   numMountPoints = 0;
+   mountThread[0] = "sit";
+   mountThread[1] = "sit";
+   mountThread[2] = "sit";
+   mountThread[3] = "sit";
+   mountThread[4] = "sit";
+   mountThread[5] = "sit";
+   mountThread[6] = "sit";
+   mountThread[7] = "sit";
+
+	maxDamage = 999999.00;
+	destroyedLevel = 200.00;
+	energyPerDamagePoint = 160;
+	speedDamageScale = 1.04;
+	collDamageThresholdVel = 20.0;
+	collDamageMultiplier   = 0.02;
+
+	massCenter = "0 0 -2";
+   massBox = "0 0 0";
+
+	maxSteeringAngle = 0.9785;  // Maximum steering angle, should match animation
+	integration = 4;           // Force integration time: TickSec/Rate
+	//tireEmitter = TireEmitter; // All the tires use the same dust emitter
+
+	// 3rd person camera settings
+	cameraRoll = false;         // Roll the camera with the vehicle
+	cameraMaxDist = 13;         // Far distance from vehicle
+	cameraOffset = 7.5;        // Vertical offset from camera mount point
+	cameraLag = 0.0;           // Velocity lag of camera
+	cameraDecay = 0.75;        // Decay per sec. rate of velocity lag
+	cameraTilt = 0.4;
+   collisionTol = 0.1;        // Collision distance tolerance
+   contactTol = 0.1;
+
+	useEyePoint = false;	
+
+	//defaultTire	 = jeepTire;
+	//defaultSpring = jeepSpring;
+	//flatTire	    = jeepFlatTire;
+	//flatSpring	 = jeepFlatSpring;
+
+   numWheels = 0;
+
+	// Rigid Body
+	mass = 200;
+	density = 5.0;
+	drag = 0.6;
+	bodyFriction = 0.6;
+	bodyRestitution = 0.6;
+	minImpactSpeed = 10;        // Impacts over this invoke the script callback
+	softImpactSpeed = 10;       // Play SoftImpact Sound
+	hardImpactSpeed = 15;      // Play HardImpact Sound
+	groundImpactMinSpeed    = 10.0;
+
+	// Engine
+	engineTorque = 12000; //4000;       // Engine power
+	engineBrake = 2000;         // Braking when throttle is 0
+	brakeTorque = 4000;        // When brakes are applied
+	maxWheelSpeed = 20;        // Engine scale by current speed / max speed
+
+	// Energy
+	maxEnergy = 100;
+	jetForce = 3000;
+	minJetEnergy = 30;
+	jetEnergyDrain = 2;
+
+   isSled = false;
+
+   forwardThrust		= 3000;
+	reverseThrust		= 2000;
+	lift			= 100;
+	maxForwardVel		= 40;
+	maxReverseVel		= 40;
+	horizontalSurfaceForce	= 0;   // Horizontal center "wing" (provides "bite" into the wind for climbing/diving and turning)
+	verticalSurfaceForce	= 0; 
+	rollForce		= 4000;
+	yawForce		= 6000;
+	pitchForce		= 6000;
+	rotationalDrag		= 0.15;
+	stallSpeed		= 10;
+
+	splash = vehicleSplash;
+	splashVelocity = 4.0;
+	splashAngle = 67.0;
+	splashFreqMod = 300.0;
+	splashVelEpsilon = 0.60;
+	bubbleEmitTime = 1.4;
+	splashEmitter[0] = vehicleFoamDropletsEmitter;
+	splashEmitter[1] = vehicleFoamEmitter;
+	splashEmitter[2] = vehicleBubbleEmitter;
+	mediumSplashSoundVelocity = 10.0;   
+	hardSplashSoundVelocity = 20.0;   
+	exitSplashSoundVelocity = 5.0;
+		
+	//mediumSplashSound = "";
+	//hardSplashSound = "";
+	//exitSplashSound = "";
+	
+	// Sounds
+	//   jetSound = ScoutThrustSound;
+	//engineSound = idleSound;
+	//squealSound = skidSound;
+	softImpactSound = slowImpactSound;
+	hardImpactSound = fastImpactSound;
+	//wheelImpactSound = slowImpactSound;
+
+	//   explosion = VehicleExplosion;
+	justcollided = 0;
+
+   uiName = "GSF CerealBox ";
+	rideable = true;
+		lookUpLimit = 0.65;
+		lookDownLimit = 0.45;
+
+	paintable = true;
+   
+   damageEmitter[0] = vehicleBurnEmitter;
+	damageEmitterOffset[0] = "0.0 0.0 0.0 ";
+	damageLevelTolerance[0] = 0.99;
+
+   damageEmitter[1] = vehicleBurnEmitter;
+	damageEmitterOffset[1] = "0.0 0.0 0.0 ";
+	damageLevelTolerance[1] = 1.0;
+
+   numDmgEmitterAreas = 1;
+
+   initialExplosionProjectile = vehicleExplosionProjectile;
+   initialExplosionOffset = 0;         //offset only uses a z value for now
+
+   burnTime = 4000;
+
+   finalExplosionProjectile = vehicleFinalExplosionProjectile;
+   finalExplosionOffset = 0.5;          //offset only uses a z value for now
+
+   minRunOverSpeed    = 2;   //how fast you need to be going to run someone over (do damage)
+   runOverDamageScale = 5;   //when you run over someone, speed * runoverdamagescale = damage amt
+   runOverPushScale   = 1.2; //how hard a person you're running over gets pushed
+};
+datablock WheeledVehicleData(Watermelon)
+{
+	category = "Vehicles";
+	displayName = " ";
+	shapeFile = "./watermelon.dts"; 
+	emap = true;
+	minMountDist = 3;
+   
+   numMountPoints = 0;
+   mountThread[0] = "sit";
+   mountThread[1] = "sit";
+   mountThread[2] = "sit";
+   mountThread[3] = "sit";
+   mountThread[4] = "sit";
+   mountThread[5] = "sit";
+   mountThread[6] = "sit";
+   mountThread[7] = "sit";
+
+	maxDamage = 999999.00;
+	destroyedLevel = 200.00;
+	energyPerDamagePoint = 160;
+	speedDamageScale = 1.04;
+	collDamageThresholdVel = 20.0;
+	collDamageMultiplier   = 0.02;
+
+	massCenter = "0 0 0";
+   massBox = "3 3 3";
+
+	maxSteeringAngle = 0.9785;  // Maximum steering angle, should match animation
+	integration = 4;           // Force integration time: TickSec/Rate
+	//tireEmitter = TireEmitter; // All the tires use the same dust emitter
+
+	// 3rd person camera settings
+	cameraRoll = false;         // Roll the camera with the vehicle
+	cameraMaxDist = 13;         // Far distance from vehicle
+	cameraOffset = 7.5;        // Vertical offset from camera mount point
+	cameraLag = 0.0;           // Velocity lag of camera
+	cameraDecay = 0.75;        // Decay per sec. rate of velocity lag
+	cameraTilt = 0.4;
+   collisionTol = 0.1;        // Collision distance tolerance
+   contactTol = 0.1;
+
+	useEyePoint = false;	
+
+	//defaultTire	 = jeepTire;
+	//defaultSpring = jeepSpring;
+	//flatTire	    = jeepFlatTire;
+	//flatSpring	 = jeepFlatSpring;
+
+   numWheels = 0;
+
+	// Rigid Body
+	mass = 400;
+	density = 5.0;
+	drag = 20.6;
+	bodyFriction = 20.6;
+	bodyRestitution = 0.6;
+	minImpactSpeed = 10;        // Impacts over this invoke the script callback
+	softImpactSpeed = 100;       // Play SoftImpact Sound
+	hardImpactSpeed = 150;      // Play HardImpact Sound
+	groundImpactMinSpeed    = 1.0;
+
+	// Engine
+	engineTorque = 12000; //4000;       // Engine power
+	engineBrake = 2000;         // Braking when throttle is 0
+	brakeTorque = 4000;        // When brakes are applied
+	maxWheelSpeed = 20;        // Engine scale by current speed / max speed
+
+	// Energy
+	maxEnergy = 100;
+	jetForce = 3000;
+	minJetEnergy = 30;
+	jetEnergyDrain = 2;
+
+   isSled = false;
+
+   forwardThrust		= 3000;
+	reverseThrust		= 2000;
+	lift			= 100;
+	maxForwardVel		= 40;
+	maxReverseVel		= 40;
+	horizontalSurfaceForce	= 0;   // Horizontal center "wing" (provides "bite" into the wind for climbing/diving and turning)
+	verticalSurfaceForce	= 0; 
+	rollForce		= 4000;
+	yawForce		= 6000;
+	pitchForce		= 6000;
+	rotationalDrag		= 0.15;
+	stallSpeed		= 10;
+
+	splash = vehicleSplash;
+	splashVelocity = 4.0;
+	splashAngle = 67.0;
+	splashFreqMod = 300.0;
+	splashVelEpsilon = 0.60;
+	bubbleEmitTime = 1.4;
+	splashEmitter[0] = vehicleFoamDropletsEmitter;
+	splashEmitter[1] = vehicleFoamEmitter;
+	splashEmitter[2] = vehicleBubbleEmitter;
+	mediumSplashSoundVelocity = 10.0;   
+	hardSplashSoundVelocity = 20.0;   
+	exitSplashSoundVelocity = 5.0;
+		
+	//mediumSplashSound = "";
+	//hardSplashSound = "";
+	//exitSplashSound = "";
+	
+	// Sounds
+	//   jetSound = ScoutThrustSound;
+	//engineSound = idleSound;
+	//squealSound = skidSound;
+	softImpactSound = slowImpactSound;
+	hardImpactSound = fastImpactSound;
+	//wheelImpactSound = slowImpactSound;
+
+	//   explosion = VehicleExplosion;
+	justcollided = 0;
+
+   uiName = "GSF Watermelon ";
+	rideable = true;
+		lookUpLimit = 0.65;
+		lookDownLimit = 0.45;
+
+	paintable = true;
+   
+   damageEmitter[0] = vehicleBurnEmitter;
+	damageEmitterOffset[0] = "0.0 0.0 0.0 ";
+	damageLevelTolerance[0] = 0.99;
+
+   damageEmitter[1] = vehicleBurnEmitter;
+	damageEmitterOffset[1] = "0.0 0.0 0.0 ";
+	damageLevelTolerance[1] = 1.0;
+
+   numDmgEmitterAreas = 1;
+
+   initialExplosionProjectile = vehicleExplosionProjectile;
+   initialExplosionOffset = 0;         //offset only uses a z value for now
+
+   burnTime = 4000;
+
+   finalExplosionProjectile = vehicleFinalExplosionProjectile;
+   finalExplosionOffset = 0.5;          //offset only uses a z value for now
+
+   minRunOverSpeed    = 2;   //how fast you need to be going to run someone over (do damage)
+   runOverDamageScale = 5;   //when you run over someone, speed * runoverdamagescale = damage amt
+   runOverPushScale   = 1.2; //how hard a person you're running over gets pushed
+};
+
+
+
+
+
+$DamageLava       = 0.01;
+$DamageHotLava    = 0.01;
+$DamageCrustyLava = 10.0;
+
+datablock TriggerData(BTrigger) 
+{ 
+    tickPeriodMS = 100; 
+}; 
+ 
+datablock TriggerData(BTrigger) 
+{ 
+    tickPeriodMS = 100; 
+}; 
+ 
+function BTrigger::onEnterTrigger( %this, %trigger, %obj ) 
+{ 
+   if (!%obj.client) 
+      return; 
+   %messageArray[0] = "\c2" @ " There are historical records that prove Jesus actually existed."; 
+   %messageArray[1] = "\c2" @ " People use the Old Testament to conclude God is evil, but there is perfect justification for the negativity."; 
+   %messageArray[2] = "\c2" @ " Creationists have led to many advancements in science."; 
+   %messageArray[3] = "\c2" @ " If evil exists then good exists, which means there must be a moral law to differentiate between good and evil, thus a moral law giver or God."; 
+   %messageArray[4] = "\c2" @ " If the big bang created life then what led to the big bang?"; 
+   %messageArray[5] = "\c2" @ " One third of all medical healings, including surgery, are labeled as miracles."; 
+   %messageArray[6] = "\c2" @ " Truth comes from within ourselves, reinforcement of biases comes from external reality."; 
+   %messageArray[7] = "\c2" @ " Only living things come from living things, so where did the first living thing come from?"; 
+   %messageArray[8] = "\c2" @ " Carbon Dating was used on two parts of the same mammoth; there was an inconsistency of 11,000 years between them."; 
+   %messageArray[9] = "\c2" @ " There are hundreds of different ways to tell the age of the earth, each gives a different number."; 
+   %messageArray[10] = "\c2" @ " A Red Hefer was born in Israel. This means the temple will be rebuilt, confirming biblical prophecy."; 
+   %messageArray[11] = "\c2" @ " The Bible was written by about 40 men over a period of about 1600 years dating from 1500 BC to about 100 years after Christ."; 
+   %messageArray[12] = "\c2" @ " Carbon Dating is flawed because the release of carbon is not constant; the 2nd law of thermodynamics proves this."; 
+   %messageArray[13] = "\c2" @ " Starlight shouldn't be used to determine the age of the earth because the speed of light can be manipulated using gravity."; 
+   %messageArray[14] = "\c2" @ " If Jesus wasn't resurrected, then why did Paul convert three years later?"; 
+   %messageArray[15] = "\c2" @ " Adult stem cells have proven to be more successful than embryonic stem cells, so why don't we use them instead?"; 
+   %messageArray[16] = "\c2" @ " Memory creates an illusion of time, time is relative to the observer."; 
+   %messageArray[17] = "\c2" @ " If the big bang occured due to a spinning singularity, then why do some planets spin in the opposite direction?"; 
+   %messageArray[18] = "\c2" @ " Only micro-evolution has been recorded, succesful mutations have never been recorded."; 
+   %messageArray[19] = "\c2" @ " Bacteria become resistant to antibiotics because they loose information, not because they evolve."; 
+   %messageArray[20] = "\c2" @ " Everything should be challenged - Christianity, evolution, etc. - because then we let go of biases and discover truth for ourselves."; 
+   %messageArray[21] = "\c2" @ " Don't listen to what other people tell you, challenge everything, even these facts."; 
+   %messageArray[22] = "\c2" @ " The meaning of life is to discover truth by using our own path. Don't blindly accept anything."; 
+   %messageArray[23] = "\c2" @ " We are born destined to be limited by comprehension, and for a reason."; 
+   %messageArray[24] = "\c2" @ " If morals are relative then they are flawed, a perfect moral law must be present to differentiate good and evil."; 
+   %messageArray[25] = "\c2" @ " Did logic and absolutes always exist or were they created?."; 
+   %messageArray[26] = "\c2" @ " What makes Jesus different from other gods is the way he treated the insignificant."; 
+   %messageArray[27] = "\c2" @ " You can't disprove God nor Jesus anymore than you can disprove leprechauns."; 
+   %messageArray[28] = "\c2" @ " Science is that which can be observed, tested, and repeated, so evolution is not science."; 
+   %messageArray[29] = "\c2" @ " Creationists believe that dinosuars died out in the flood, which explains fossils and terrain deformations."; 
+   %messageArray[30] = "\c2" @ " There are about 10,000 Creationist scientists in the United States alone."; 
+   %messageArray[31] = "\c2" @ " If micro-evolution is necessary for adapting to the environment, then why would macro-evolution occur?"; 
+   %messageArray[32] = "\c2" @ " The point of pain, suffering, disaster, etc. is to make us realize this life isn't important."; 
+   %messageArray[33] = "\c2" @ " A loving God allows pain because pain is the realization that something is wrong."; 
+   %messageArray[34] = "\c2" @ " If there is no life after death then what is the point of love and existence?"; 
+   %messageArray[35] = "\c2" @ " The purpose of meaning is to give value to existence that is also insignificant to eternity."; 
+   %messageArray[36] = "\c2" @ " If the devil doesn't exist then what is the root of evil? Does it even exist?"; 
+   %messageArray[37] = "\c2" @ " The meaning of life is not complex, it is so simple it's perplexing, but we make it complex."; 
+   %messageArray[38] = "\c2" @ " Truth lies within us because external reality offers nothing but opinion."; 
+   %messageArray[39] = "\c2" @ " Life is not a problem to be solved, it is a mystery to be lived."; 
+   %messageArray[40] = "\c2" @ " No other sacred writing has such perfectly accurate predictions of the future than the Bible.";
+   %messageArray[41] = "\c2" @ " The Bible is not a science book, yet it is scientifically accurate. There is no SCIENTIFIC evidence that contradicts the Bible.";
+   %messageArray[42] = "\c2" @ " There is obvious intelligence in objective reality: logic, absolutes, DNA, life, etc.";
+   %messageArray[43] = "\c2" @ " Every clock has craftsman, so why wouldn't earth have a creator?";
+   %messageArray[44] = "\c2" @ " Reality is that which doesn't dependent on the mind to exist.";
+   %messageArray[45] = "\c2" @ " The Vatican rejected books from the Bible because they were proven to be unathentic.";
+   %messageArray[46] = "\c2" @ " The book of Judah was rejected because the language it used was inconsistance with the language used at the time.";
+   %messageArray[47] = "\c2" @ " Christian principles have proven authentic in the United States over time; we are a nation under God that enjoys freedom.";
+   %messageArray[48] = "\c2" @ " The Bible has been proven to be 100% authentic.";
+   %messageArray[49] = "\c2" @ " Secularity is not truth, but freedom of persecution allows us the freedom to discover truth for ourselves.";
+   %messageArray[50] = "\c2" @ " Logic is not the answer because it leads to stagnation of the heart. Truth comes from mediation of the heart and mind.";
+   %messageArray[51] = "\c2" @ " Don't stagnate in your biases, challenge everything and humble yourselves before truth and you will discover it.";
+ 
+   messageAll('SomeDumarseFellIntoTheGrill', %messageArray[getRandom(0,51)]); 
+   %obj.kill(); 
+}
+
+
+
+datablock fxLightData(GSFLight)
+{
+	uiName = "";
+
+	LightOn = false;
+	radius = 10;
+	brightness = 9;
+	color = "1 1 1 1";
+
+	flareOn = true;
+	flarebitmap = "base/lighting/gsfflare";
+	NearSize	= 20;
+	FarSize = 30;
+};
+datablock ItemData(GSFFanItem)
+{
+	category = "Weapon";  // Mission editor category
+	className = "Weapon"; // For inventory system
+
+	 // Basic Item Properties
+	shapeFile = "~/Map_MikesHouse/gsffan.dts";
+	rotate = 1;
+	mass = 1;
+	density = 0.2;
+	elasticity = 0.2;
+	friction = 0.6;
+	emap = true;
+
+	//gui stuff
+	uiName = "";
+	doColorShift = true;
+	colorShiftColor = "0.25 0.25 0.25 1.000";
+
+};
+
+function GSFFanItem::onAdd(%this,%obj)
+{
+	%obj.playthread(0, rev);
+}
+//--- OBJECT WRITE BEGIN ---
+new SimGroup(MissionGroup) {
+
+   new ScriptObject(MissionInfo) {
+         name = "Mikes Community House";
+         saveName = "Mikes_House";
+   };
+   new MissionArea(MissionArea) {
+      Area = "-384 -672 768 1344";
+         locked = "true";
+         flightCeiling = "300";
+         flightCeilingRange = "20";
+   };
+   new Sky(Sky) {
+      position = "336 136 0";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      materialList = "./mhsky/mhsky.dml";
+      cloudHeightPer[0] = "0.349971";
+      cloudHeightPer[1] = "0.3";
+      cloudHeightPer[2] = "0.199973";
+      cloudSpeed1 = "0.0005";
+      cloudSpeed2 = "0.001";
+      cloudSpeed3 = "0.0003";
+      visibleDistance = "2000";
+      fogDistance = "5000";
+      fogColor = "1.000000 0.900000 0.400000 1.000000";
+      fogStorm1 = "0";
+      fogStorm2 = "0";
+      fogStorm3 = "0";
+      fogVolume1 = "0 0 0";
+      fogVolume2 = "0 0 0";
+      fogVolume3 = "0 0 0";
+      fogVolumeColor1 = "128.000000 128.000000 128.000000 -222768174765569860000000000000000000000.000000";
+      fogVolumeColor2 = "128.000000 128.000000 128.000000 0.000000";
+      fogVolumeColor3 = "128.000000 128.000000 128.000000 -170698929442160050000000000000000000000.000000";
+      windVelocity = "1 1 0";
+      windEffectPrecipitation = "0";
+      SkySolidColor = "0.000000 0.000000 0.100000 1.000000";
+      useSkyTextures = "1";
+      renderBottomTexture = "1";
+      noRenderBans = "1";
+         locked = "true";
+   };
+   new Sun() {
+      azimuth = "320";
+      elevation = "10";
+      color = "1.000000 1.000000 0.400000 1.000000";
+      ambient = "0.500000 0.500000 0.500000 1.000000";
+   };
+   new SimGroup(PlayerDropPoints) {
+
+      new SpawnSphere(SpawnKitchen) {
+         position = "232.672 799.122 89.3155";
+         rotation = "1 0 0 0";
+         scale = "0.940827 1.97505 1";
+         dataBlock = "SpawnSphereMarker";
+         canSetIFLs = "0";
+         radius = "0.1";
+         sphereWeight = "100";
+         indoorWeight = "1";
+         outdoorWeight = "1";
+            locked = "false";
+            homingCount = "0";
+            directional = "1";
+            lockCount = "0";
+      };
+      new SpawnSphere(SpawnLivingRoom) {
+         position = "-161.068 698.169 49.4665";
+         rotation = "1 0 0 0";
+         scale = "0.940827 1.97505 1";
+         dataBlock = "SpawnSphereMarker";
+         canSetIFLs = "0";
+         radius = "0.1";
+         sphereWeight = "1";
+         indoorWeight = "1";
+         outdoorWeight = "1";
+            locked = "false";
+            homingCount = "0";
+            directional = "1";
+            lockCount = "0";
+      };
+      new SpawnSphere(SpawnFrontRoom) {
+         position = "295.938 88.614 52.6";
+         rotation = "1 0 0 0";
+         scale = "0.940827 1.97505 1";
+         dataBlock = "SpawnSphereMarker";
+         canSetIFLs = "0";
+         radius = "0.1";
+         sphereWeight = "1";
+         indoorWeight = "1";
+         outdoorWeight = "1";
+            locked = "false";
+            homingCount = "0";
+            directional = "1";
+            lockCount = "0";
+      };
+      new SpawnSphere(SpawnMikesRoom) {
+         position = "378.824 -52.5759 175.492";
+         rotation = "1 0 0 0";
+         scale = "0.940827 1.97505 1";
+         dataBlock = "SpawnSphereMarker";
+         canSetIFLs = "0";
+         radius = "0.1";
+         sphereWeight = "1";
+         indoorWeight = "1";
+         outdoorWeight = "1";
+            locked = "false";
+            homingCount = "0";
+            directional = "1";
+            lockCount = "0";
+      };
+      new SpawnSphere(SpawnGameRoom) {
+         position = "-122.686 619.385 209.591";
+         rotation = "1 0 0 0";
+         scale = "0.940827 1.97505 1";
+         dataBlock = "SpawnSphereMarker";
+         canSetIFLs = "0";
+         radius = "0.1";
+         sphereWeight = "1";
+         indoorWeight = "1";
+         outdoorWeight = "1";
+            locked = "false";
+            homingCount = "0";
+            directional = "1";
+            lockCount = "0";
+      };
+      new SpawnSphere(SpawnParentsRoom) {
+         position = "67.1647 49.1865 266.94";
+         rotation = "1 0 0 0";
+         scale = "0.940827 1.97505 1";
+         dataBlock = "SpawnSphereMarker";
+         canSetIFLs = "0";
+         radius = "0.1";
+         sphereWeight = "1";
+         indoorWeight = "1";
+         outdoorWeight = "1";
+            locked = "false";
+            homingCount = "0";
+            directional = "1";
+            lockCount = "0";
+      };
+      new SpawnSphere(SpawnSistersRoom) {
+         position = "235.562 706.452 236.547";
+         rotation = "1 0 0 0";
+         scale = "0.940827 1.97505 1";
+         dataBlock = "SpawnSphereMarker";
+         canSetIFLs = "0";
+         radius = "0.1";
+         sphereWeight = "1";
+         indoorWeight = "1";
+         outdoorWeight = "1";
+            locked = "false";
+            homingCount = "0";
+            directional = "1";
+            lockCount = "0";
+      };
+      new SpawnSphere(SpawnSistersRoom) {
+         position = "248.979 706.187 236.06";
+         rotation = "1 0 0 0";
+         scale = "0.940827 1.97505 1";
+         dataBlock = "SpawnSphereMarker";
+         canSetIFLs = "0";
+         radius = "0.1";
+         sphereWeight = "1";
+         indoorWeight = "1";
+         outdoorWeight = "1";
+            locked = "false";
+            homingCount = "0";
+            directional = "1";
+            lockCount = "0";
+      };
+      new SpawnSphere(SpawnGuestRoom) {
+         position = "22.4779 637.054 173.931";
+         rotation = "1 0 0 0";
+         scale = "0.940827 1.97505 1";
+         dataBlock = "SpawnSphereMarker";
+         canSetIFLs = "0";
+         radius = "0.1";
+         sphereWeight = "1";
+         indoorWeight = "1";
+         outdoorWeight = "1";
+            locked = "false";
+            homingCount = "0";
+            directional = "1";
+            lockCount = "0";
+      };
+      new SpawnSphere(SpawnGuestRoom) {
+         position = "36.3679 636.687 174.04";
+         rotation = "1 0 0 0";
+         scale = "0.940827 1.97505 1";
+         dataBlock = "SpawnSphereMarker";
+         canSetIFLs = "0";
+         radius = "0.1";
+         sphereWeight = "1";
+         indoorWeight = "1";
+         outdoorWeight = "1";
+            locked = "false";
+            homingCount = "0";
+            directional = "1";
+            lockCount = "0";
+      };
+      new SpawnSphere(SpawnMikesRoom) {
+         position = "362.926 -52.8103 175.688";
+         rotation = "1 0 0 0";
+         scale = "0.940827 1.97505 1";
+         dataBlock = "SpawnSphereMarker";
+         canSetIFLs = "0";
+         radius = "0.1";
+         sphereWeight = "1";
+         indoorWeight = "1";
+         outdoorWeight = "1";
+            locked = "false";
+            homingCount = "0";
+            directional = "1";
+            lockCount = "0";
+      };
+      new SpawnSphere(SpawnGameRoom) {
+         position = "-117.971 602.934 209.82";
+         rotation = "1 0 0 0";
+         scale = "0.940827 1.97505 1";
+         dataBlock = "SpawnSphereMarker";
+         canSetIFLs = "0";
+         radius = "0.1";
+         sphereWeight = "1";
+         indoorWeight = "1";
+         outdoorWeight = "1";
+            locked = "false";
+            homingCount = "0";
+            directional = "1";
+            lockCount = "0";
+      };
+      new SpawnSphere(SpawnLivingRoom) {
+         position = "-180.03 699.005 49.777";
+         rotation = "1 0 0 0";
+         scale = "0.940827 1.97505 1";
+         dataBlock = "SpawnSphereMarker";
+         canSetIFLs = "0";
+         radius = "0.1";
+         sphereWeight = "1";
+         indoorWeight = "1";
+         outdoorWeight = "1";
+            locked = "false";
+            homingCount = "0";
+            directional = "1";
+            lockCount = "0";
+      };
+      new SpawnSphere(SpawnFrontRoom) {
+         position = "279.495 88.4055 52.9466";
+         rotation = "1 0 0 0";
+         scale = "0.940827 1.97505 1";
+         dataBlock = "SpawnSphereMarker";
+         canSetIFLs = "0";
+         radius = "0.1";
+         sphereWeight = "1";
+         indoorWeight = "1";
+         outdoorWeight = "1";
+            locked = "false";
+            homingCount = "0";
+            directional = "1";
+            lockCount = "0";
+      };
+      new SpawnSphere(SpawnParentsRoom) {
+         position = "55.0026 49.2813 265.612";
+         rotation = "1 0 0 0";
+         scale = "0.940827 1.97505 1";
+         dataBlock = "SpawnSphereMarker";
+         canSetIFLs = "0";
+         radius = "0.1";
+         sphereWeight = "1";
+         indoorWeight = "1";
+         outdoorWeight = "1";
+            locked = "false";
+            homingCount = "0";
+            directional = "1";
+            lockCount = "0";
+      };
+      new SpawnSphere(SpawnKitchen) {
+         position = "225.935 788.132 87.589";
+         rotation = "1 0 0 0";
+         scale = "0.940827 1.97505 1";
+         dataBlock = "SpawnSphereMarker";
+         canSetIFLs = "0";
+         radius = "0.1";
+         sphereWeight = "100";
+         indoorWeight = "1";
+         outdoorWeight = "1";
+            locked = "false";
+            homingCount = "0";
+            directional = "1";
+            lockCount = "0";
+      };
+   };
+   new ScriptObject() {
+      class = "BuildMacroSO";
+         event0 = "Server\tuseSprayCan\t\t\t\t\t\t";
+         numEvents = "1";
+   };
+   new fxSunLight(SunLight) {
+      position = "2.75706 -3.71652 -9.41604e-008";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      Enable = "1";
+      LocalFlareBitmap = "base/lighting/corona";
+      RemoteFlareBitmap = "base/lighting/corona2";
+      SunAzimuth = "275";
+      SunElevation = "65";
+      LockToRealSun = "0";
+      FlareTP = "1";
+      Colour = "1.000000 0.700000 0.500000 1.000000";
+      Brightness = "1";
+      FlareSize = "1.2";
+      FadeTime = "0.1";
+      BlendMode = "0";
+      AnimColour = "0";
+      AnimBrightness = "0";
+      AnimRotation = "1";
+      AnimSize = "0";
+      AnimAzimuth = "0";
+      AnimElevation = "0";
+      LerpColour = "1";
+      LerpBrightness = "1";
+      LerpRotation = "1";
+      LerpSize = "1";
+      LerpAzimuth = "1";
+      LerpElevation = "1";
+      LinkFlareSize = "0";
+      SingleColourKeys = "1";
+      MinColour = "0.000000 0.000000 0.000000 1.000000";
+      MaxColour = "1.000000 1.000000 1.000000 1.000000";
+      MinBrightness = "0";
+      MaxBrightness = "1";
+      MinRotation = "0";
+      MaxRotation = "359";
+      minSize = "0.5";
+      MaxSize = "1";
+      MinAzimuth = "0";
+      MaxAzimuth = "359";
+      MinElevation = "-30";
+      MaxElevation = "210";
+      RedKeys = "AZA";
+      GreenKeys = "AZA";
+      BlueKeys = "AZA";
+      BrightnessKeys = "AZA";
+      RotationKeys = "AZA";
+      SizeKeys = "AZA";
+      AzimuthKeys = "AZ";
+      ElevationKeys = "AZ";
+      ColourTime = "5";
+      BrightnessTime = "5";
+      RotationTime = "400";
+      SizeTime = "5";
+      AzimuthTime = "5";
+      ElevationTime = "5";
+   };
+   new InteriorInstance() {
+      position = "52.4267 336.473 37.6";
+      rotation = "1 0 0 0";
+      scale = "8 8 8";
+      interiorFile = "./mikeshouse.dif";
+      useGLLighting = "0";
+      showTerrainInside = "0";
+   };
+   new InteriorInstance() {
+      position = "21.4267 463.273 -155.6";
+      rotation = "1 0 0 0";
+      scale = "16 16 16";
+      interiorFile = "./mikeshouse2.dif";
+      useGLLighting = "0";
+      showTerrainInside = "0";
+   };
+   new TSStatic() {
+      position = "25.2364 734.312 47.0957";
+      rotation = "1 0 0 0";
+      scale = "15.5 1 25.5";
+      shapeName = "./glass4.dts";
+   };
+   new TSStatic() {
+      position = "84.4364 730.312 47.0957";
+      rotation = "1 0 0 0";
+      scale = "15.5 1 25.5";
+      shapeName = "./glass4.dts";
+   };
+   new TSStatic() {
+      position = "435.022 595.006 105.357";
+      rotation = "0 0 1 90";
+      scale = "18.5 5 20.5";
+      shapeName = "./glass.dts";
+   };
+   new TSStatic() {
+      position = "435.022 538.806 105.357";
+      rotation = "0 0 1 90";
+      scale = "18.5 5 20.5";
+      shapeName = "./glass.dts";
+   };
+   new TSStatic() {
+      position = "-258.847 173.623 122.014";
+      rotation = "0 0 1 90";
+      scale = "50 1 10";
+      shapeName = "./blinds.dts";
+   };
+   new TSStatic() {
+      position = "-526.013 807.747 85.8115";
+      rotation = "0 0 1 45";
+      scale = "11 11 20";
+      shapeName = "./tree8.dts";
+   };
+   new TSStatic() {
+      position = "414.262 305.538 182.856";
+      rotation = "0 0 1 45";
+      scale = "7 7 7";
+      shapeName = "./PLANT5.dts";
+   };
+   new TSStatic() {
+      position = "518.033 -202.586 87.152";
+      rotation = "0 0 1 90";
+      scale = "11 11 20";
+      shapeName = "./tree8.dts";
+   };
+   new TSStatic() {
+      position = "713.18 804.34 84.168";
+      rotation = "1 0 0 0";
+      scale = "11 11 20";
+      shapeName = "./tree8.dts";
+   };
+   new TSStatic() {
+      position = "-60.8636 -774.591 84.1607";
+      rotation = "0 0 1 90";
+      scale = "11 11 20";
+      shapeName = "./tree8.dts";
+   };
+   new TSStatic() {
+      position = "-531.413 803.747 84.0114";
+      rotation = "0 0 -1 45";
+      scale = "11 11 20";
+      shapeName = "./tree8.dts";
+   };
+   new TSStatic() {
+      position = "-55.4636 -770.591 85.9607";
+      rotation = "1 0 0 0";
+      scale = "11 11 20";
+      shapeName = "./tree8.dts";
+   };
+   new TSStatic() {
+      position = "427.909 107.093 198.757";
+      rotation = "0 0 1 90";
+      scale = "50 1 40";
+      shapeName = "./blinds.dts";
+   };
+   new TSStatic() {
+      position = "340.943 -63.1321 197.498";
+      rotation = "1 0 0 0";
+      scale = "25 1 40";
+      shapeName = "./blinds.dts";
+   };
+   new TSStatic() {
+      position = "285.127 -63.169 198.341";
+      rotation = "1 0 0 0";
+      scale = "25 1 40";
+      shapeName = "./blinds.dts";
+   };
+   new TSStatic() {
+      position = "427.287 619.823 197.846";
+      rotation = "0 0 1 90";
+      scale = "50 1 40";
+      shapeName = "./blinds.dts";
+   };
+   new TSStatic() {
+      position = "293.974 157.913 155.705";
+      rotation = "0 0 1 45";
+      scale = "6.1 6.1 6.1";
+      shapeName = "./gsffan.dts";
+   };
+   new TSStatic() {
+      position = "192.169 839.252 78.9567";
+      rotation = "0 0 -1 45";
+      scale = "30 1 25";
+      shapeName = "./blinds.dts";
+   };
+   new TSStatic() {
+      position = "280.467 837.507 79.9736";
+      rotation = "0 0 1 45";
+      scale = "33 1 25";
+      shapeName = "./blinds.dts";
+   };
+   new TSStatic() {
+      position = "340.554 -62.4143 62.5537";
+      rotation = "1 0 0 0";
+      scale = "25 1 40";
+      shapeName = "./blinds.dts";
+   };
+   new TSStatic() {
+      position = "230.583 -63.2243 62.9774";
+      rotation = "1 0 0 0";
+      scale = "25 1 40";
+      shapeName = "./blinds.dts";
+   };
+   new TSStatic() {
+      position = "-102.292 727.371 62.904";
+      rotation = "1 0 0 0";
+      scale = "50 1 40";
+      shapeName = "./blinds.dts";
+   };
+   new TSStatic() {
+      position = "93.3747 727.684 197.889";
+      rotation = "1 0 0 0";
+      scale = "50 1 40";
+      shapeName = "./blinds.dts";
+   };
+   new TSStatic() {
+      position = "316.279 728.226 197.47";
+      rotation = "1 0 0 0";
+      scale = "50 1 40";
+      shapeName = "./blinds.dts";
+   };
+   new TSStatic() {
+      position = "-258.992 615.971 197.343";
+      rotation = "0 0 1 90";
+      scale = "50 1 40";
+      shapeName = "./blinds.dts";
+   };
+   new TSStatic() {
+      position = "-259.399 616.258 61.6816";
+      rotation = "0 0 1 90";
+      scale = "50 1 40";
+      shapeName = "./blinds.dts";
+   };
+   new TSStatic() {
+      position = "428.059 108.887 62.0295";
+      rotation = "0 0 1 90";
+      scale = "50 1 40";
+      shapeName = "./blinds.dts";
+   };
+   new TSStatic() {
+      position = "284.338 -62.4512 63.3967";
+      rotation = "1 0 0 0";
+      scale = "25 1 40";
+      shapeName = "./blinds.dts";
+   };
+   new TSStatic() {
+      position = "-258.526 173.504 198.512";
+      rotation = "0 0 1 90";
+      scale = "50 1 40";
+      shapeName = "./blinds.dts";
+   };
+   new TSStatic() {
+      position = "-42.2409 41.2445 197.547";
+      rotation = "1 0 0 0";
+      scale = "25 1 40";
+      shapeName = "./blinds.dts";
+   };
+   new TSStatic() {
+      position = "-98.4569 41.2076 198.39";
+      rotation = "1 0 0 0";
+      scale = "25 1 40";
+      shapeName = "./blinds.dts";
+   };
+   new TSStatic() {
+      position = "-153.812 41.2345 258.171";
+      rotation = "1 0 0 0";
+      scale = "25 1 10";
+      shapeName = "./blinds.dts";
+   };
+   new InteriorInstance() {
+      position = "175.93 -53.0754 303.593";
+      rotation = "0 0 -1 90";
+      scale = "2 2 2";
+      interiorFile = "./ee.dif";
+      useGLLighting = "0";
+      showTerrainInside = "0";
+   };
+   new TSStatic() {
+      position = "177.904 433.757 283.669";
+      rotation = "0 0 1 45";
+      scale = "6.1 6.1 6.1";
+      shapeName = "./gsffan.dts";
+   };
+   new TSStatic() {
+      position = "-54.0766 185.845 283.424";
+      rotation = "0 0 1 45";
+      scale = "6.1 6.1 6.1";
+      shapeName = "./gsffan.dts";
+   };
+   new TSStatic() {
+      position = "324.183 639.197 283.34";
+      rotation = "1 0 0 0";
+      scale = "6.1 6.1 6.1";
+      shapeName = "./gsffan.dts";
+   };
+   new TSStatic() {
+      position = "313.758 137.853 283.836";
+      rotation = "0 0 1 45";
+      scale = "6.1 6.1 6.1";
+      shapeName = "./gsffan.dts";
+   };
+   new InteriorInstance() {
+      position = "52.4267 336.473 37.6";
+      rotation = "1 0 0 0";
+      scale = "8 8 8";
+      interiorFile = "./fanbulb.dif";
+      useGLLighting = "0";
+      showTerrainInside = "0";
+   };
+   new TSStatic() {
+      position = "707.78 800.34 82.368";
+      rotation = "0 0 1 90";
+      scale = "11 11 20";
+      shapeName = "./tree8.dts";
+   };
+   new TSStatic() {
+      position = "-262.752 144.703 108.202";
+      rotation = "0 0 1 90";
+      scale = "9.5 1 7.5";
+      shapeName = "./glass4.dts";
+   };
+   new TSStatic() {
+      position = "-262.752 200.303 108.202";
+      rotation = "0 0 -1 90";
+      scale = "9.5 1 7.5";
+      shapeName = "./glass4.dts";
+   };
+   new TSStatic() {
+      position = "-266.752 144.703 72.002";
+      rotation = "0 0 1 90";
+      scale = "9.5 1 7.5";
+      shapeName = "./glass4.dts";
+   };
+   new TSStatic() {
+      position = "-266.752 200.103 72.002";
+      rotation = "0 0 -1 90";
+      scale = "9.5 1 7.5";
+      shapeName = "./glass4.dts";
+   };
+   new TSStatic() {
+      position = "-153.401 33.5723 208.42";
+      rotation = "1 0 0 0";
+      scale = "9.5 1 7.5";
+      shapeName = "./glass4.dts";
+   };
+   new TSStatic() {
+      position = "-153.401 37.9723 244.22";
+      rotation = "1 0 0 0";
+      scale = "9.5 1 7.5";
+      shapeName = "./glass4.dts";
+   };
+   new TSStatic() {
+      position = "-10.0234 33.7758 132.955";
+      rotation = "1 0 0 0";
+      scale = "12 1 5";
+      shapeName = "./glass4.dts";
+   };
+   new TSStatic() {
+      position = "-67.0234 33.7758 132.955";
+      rotation = "1 0 0 0";
+      scale = "14 1 5";
+      shapeName = "./glass4.dts";
+   };
+   new TSStatic() {
+      position = "-123.423 33.7758 132.955";
+      rotation = "1 0 0 0";
+      scale = "14 1 5";
+      shapeName = "./glass4.dts";
+   };
+   new TSStatic() {
+      position = "-180.223 33.7758 132.955";
+      rotation = "1 0 0 0";
+      scale = "12.5 1 5";
+      shapeName = "./glass4.dts";
+   };
+   new TSStatic() {
+      position = "230.116 -66.5461 243.66";
+      rotation = "1 0 0 0";
+      scale = "9.5 1 7.5";
+      shapeName = "./glass4.dts";
+   };
+   new TSStatic() {
+      position = "230.116 -70.9461 207.86";
+      rotation = "1 0 0 0";
+      scale = "9.5 1 7.5";
+      shapeName = "./glass4.dts";
+   };
+   new TSStatic() {
+      position = "229.127 -63.169 258.341";
+      rotation = "1 0 0 0";
+      scale = "25 1 10";
+      shapeName = "./blinds.dts";
+   };
+   new TSStatic() {
+      position = "523.433 -198.586 88.952";
+      rotation = "1 0 0 0";
+      scale = "11 11 20";
+      shapeName = "./tree8.dts";
+   };
+   new fxLight(test) {
+      position = "-83.5289 572.467 149.4";
+      rotation = "0 0 -1 90.0002";
+      scale = "4 4 4";
+      dataBlock = "GSFLight";
+      Enable = "1";
+      IconSize = "7";
+         brick = "8562";
+   };
+   new fxLight(test) {
+      position = "280.511 144.028 149.6";
+      rotation = "0 0 -1 90.0002";
+      scale = "4 4 4";
+      dataBlock = "GSFLight";
+      Enable = "1";
+      IconSize = "7";
+         brick = "8562";
+   };
+   new fxLight(test) {
+      position = "-67.3274 172.998 277.496";
+      rotation = "0 0 -1 90.0002";
+      scale = "4 4 4";
+      dataBlock = "GSFLight";
+      Enable = "1";
+      IconSize = "7";
+         brick = "8562";
+   };
+   new fxLight(test) {
+      position = "164.549 420.072 277.351";
+      rotation = "0 0 -1 90.0002";
+      scale = "4 4 4";
+      dataBlock = "GSFLight";
+      Enable = "1";
+      IconSize = "7";
+         brick = "8562";
+   };
+   new fxLight(test) {
+      position = "116.622 620.543 277.635";
+      rotation = "0 0 -1 90.0002";
+      scale = "4 4 4";
+      dataBlock = "GSFLight";
+      Enable = "1";
+      IconSize = "7";
+         brick = "8562";
+   };
+   new fxLight(test) {
+      position = "324.161 620.431 277.402";
+      rotation = "0 0 -1 90.0002";
+      scale = "4 4 4";
+      dataBlock = "GSFLight";
+      Enable = "1";
+      IconSize = "7";
+         brick = "8562";
+   };
+   new fxLight(test) {
+      position = "300.426 124.755 277.627";
+      rotation = "0 0 -1 90.0002";
+      scale = "4 4 4";
+      dataBlock = "GSFLight";
+      Enable = "1";
+      IconSize = "7";
+         brick = "8562";
+   };
+   new TSStatic() {
+      position = "-218.109 907.98 43.8098";
+      rotation = "1 0 0 0";
+      scale = "50 1 30";
+      shapeName = "./fence.dts";
+   };
+   new TSStatic() {
+      position = "-124.109 907.98 43.8098";
+      rotation = "1 0 0 0";
+      scale = "50 1 30";
+      shapeName = "./fence.dts";
+   };
+   new TSStatic() {
+      position = "-26.509 907.98 43.8098";
+      rotation = "1 0 0 0";
+      scale = "50 1 30";
+      shapeName = "./fence.dts";
+   };
+   new TSStatic() {
+      position = "-263.765 789.608 42.9563";
+      rotation = "0 0 1 90";
+      scale = "40 1 30";
+      shapeName = "./fence.dts";
+   };
+   new TSStatic() {
+      position = "-263.765 867.808 42.9563";
+      rotation = "0 0 1 90";
+      scale = "40 1 30";
+      shapeName = "./fence.dts";
+   };
+   new TSStatic() {
+      position = "409.087 868.039 44.2317";
+      rotation = "0 0 1 90";
+      scale = "40 1 30";
+      shapeName = "./fence.dts";
+   };
+   new TSStatic() {
+      position = "409.087 789.839 44.2317";
+      rotation = "0 0 1 90";
+      scale = "40 1 30";
+      shapeName = "./fence.dts";
+   };
+   new TSStatic() {
+      position = "409.087 947.839 44.2317";
+      rotation = "0 0 1 90";
+      scale = "40 1 30";
+      shapeName = "./fence.dts";
+   };
+   new TSStatic() {
+      position = "261.318 989.393 44.2382";
+      rotation = "1 0 0 0";
+      scale = "50 1 30";
+      shapeName = "./fence.dts";
+   };
+   new TSStatic() {
+      position = "167.318 989.393 44.2382";
+      rotation = "1 0 0 0";
+      scale = "50 1 30";
+      shapeName = "./fence.dts";
+   };
+   new TSStatic() {
+      position = "120.3 949.475 42.6844";
+      rotation = "0 0 1 90";
+      scale = "40 1 30";
+      shapeName = "./fence.dts";
+   };
+   new SimGroup(clock) {
+
+      new StaticShape(hours) {
+         position = "384.238 503.958 90.779";
+         rotation = "1 0 0 0";
+         scale = "1 1 1";
+         dataBlock = "LCD";
+         canSetIFLs = "0";
+            maxTime = "10";
+            Delay = "3600000";
+            time = "0";
+      };
+      new StaticShape(minutes) {
+         position = "384.238 499.358 90.779";
+         rotation = "1 0 0 0";
+         scale = "1 1 1";
+         dataBlock = "LCD";
+         canSetIFLs = "0";
+            maxTime = "10";
+            Delay = "60000";
+            time = "5";
+      };
+      new StaticShape(tenMinutes) {
+         position = "384.238 500.958 90.779";
+         rotation = "1 0 0 0";
+         scale = "1 1 1";
+         dataBlock = "LCD";
+         canSetIFLs = "0";
+            maxTime = "6";
+            Delay = "600000";
+            time = "0";
+      };
+      new StaticShape(tenHours) {
+         position = "384.238 505.758 90.779";
+         rotation = "1 0 0 0";
+         scale = "1 1 1";
+         dataBlock = "LCD";
+         canSetIFLs = "0";
+            maxTime = "10";
+            Delay = "36000000";
+            time = "0";
+      };
+   };
+   new StaticShape() {
+      position = "384.238 502.558 90.779";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "LCDColon";
+      canSetIFLs = "0";
+   };
+   new Trigger(Trigger) {
+      position = "-232.69 113.344 203.577";
+      rotation = "1 0 0 0";
+      scale = "22 14 4";
+      dataBlock = "BTrigger";
+      polyhedron = "0.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 0.0000000 0.0000000 0.0000000 1.0000000";
+   };
+   new WheeledVehicle() {
+      position = "214.439 575.68 93.8391";
+      rotation = "-0.00367091 0.00121462 0.999993 18.7769";
+      scale = "1 1 1";
+      dataBlock = "CerealBox";
+      canSetIFLs = "0";
+      disableMove = "0";
+         creationTime = "12098";
+         brickGroup = "8767";
+         spawnBrick = "10015";
+         color = "1 1 1 1";
+   };
+   new WheeledVehicle() {
+      position = "183.288 624.639 214.84";
+      rotation = "0.00541465 -0.00755678 0.999957 87.7317";
+      scale = "2 2 2";
+      dataBlock = "PictureFrame";
+      canSetIFLs = "0";
+      disableMove = "0";
+         creationTime = "12098";
+         brickGroup = "7200";
+         spawnBrick = "8457";
+         color = "1 1 1 1";
+   };
+   new TSStatic() {
+      position = "358.718 989.393 44.2382";
+      rotation = "1 0 0 0";
+      scale = "50 1 30";
+      shapeName = "./fence.dts";
+   };
+   new TSStatic() {
+      position = "397.037 388.388 199.415";
+      rotation = "1 0 0 0";
+      scale = "4 9 1";
+      shapeName = "./water.dts";
+   };
+   new PhysicalZone(PhyZone) {
+      position = "370.273 444.789 171.754";
+      rotation = "1 0 0 0";
+      scale = "60 120 28";
+      velocityMod = "1";
+      gravityMod = "1";
+      extraDrag = "0";
+      isWater = "1";
+      waterViscosity = "40";
+      waterDensity = "1";
+      waterColor = "0.500000 0.500000 0.500000 1.000000";
+      appliedForce = "0 0 0";
+      polyhedron = "0.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 0.0000000 0.0000000 0.0000000 1.0000000";
+   };
+   new TSStatic() {
+      position = "-391.751 -157.831 86.2873";
+      rotation = "0 0 1 90";
+      scale = "11 11 20";
+      shapeName = "./tree8.dts";
+   };
+   new TSStatic() {
+      position = "255.368 457.036 181.411";
+      rotation = "1 0 0 0";
+      scale = "7 7 7";
+      shapeName = "./PLANT5.dts";
+   };
+   new TSStatic() {
+      position = "-196.092 998.364 148.51";
+      rotation = "0 0 1 9.99997";
+      scale = "5 5 7.5";
+      shapeName = "./tree3.dts";
+   };
+   new TSStatic() {
+      position = "-62.2785 999.52 142.207";
+      rotation = "0 0 1 135";
+      scale = "5 5 7";
+      shapeName = "./tree3.dts";
+   };
+   new TSStatic() {
+      position = "325.148 1075.48 140.613";
+      rotation = "1 0 0 0";
+      scale = "5 5 7";
+      shapeName = "./tree3.dts";
+   };
+   new TSStatic() {
+      position = "180.707 1078.26 132.569";
+      rotation = "0 0 1 190";
+      scale = "5 5 6.5";
+      shapeName = "./tree3.dts";
+   };
+   new TSStatic() {
+      position = "211.117 -237.553 78.0557";
+      rotation = "1 0 0 0";
+      scale = "3 3 3";
+      shapeName = "./tree3.dts";
+   };
+   new TSStatic() {
+      position = "272.517 -237.553 78.0557";
+      rotation = "1 0 0 0";
+      scale = "3 3 3";
+      shapeName = "./tree3.dts";
+   };
+   new TSStatic() {
+      position = "334.517 -237.553 78.0557";
+      rotation = "1 0 0 0";
+      scale = "3 3 3";
+      shapeName = "./tree3.dts";
+   };
+   new TSStatic() {
+      position = "239.322 847.431 55.1699";
+      rotation = "1 0 0 0";
+      scale = "7 7 7";
+      shapeName = "./PLANT5.dts";
+   };
+   new TSStatic() {
+      position = "-242.711 709.82 54.8679";
+      rotation = "1 0 0 0";
+      scale = "7 7 7";
+      shapeName = "./PLANT3.dts";
+   };
+   new TSStatic() {
+      position = "-241.069 346.816 183.246";
+      rotation = "1 0 0 0";
+      scale = "7 7 7";
+      shapeName = "./PLANT3.dts";
+   };
+   new TSStatic() {
+      position = "21.4668 441.661 55.1494";
+      rotation = "1 0 0 0";
+      scale = "7 7 7";
+      shapeName = "./PLANT3.dts";
+   };
+   new TSStatic() {
+      position = "122.327 530.745 182.409";
+      rotation = "1 0 0 0";
+      scale = "7 7 7";
+      shapeName = "./PLANT3.dts";
+   };
+   new TSStatic() {
+      position = "-59.5521 216.649 182.765";
+      rotation = "1 0 0 0";
+      scale = "7 7 7";
+      shapeName = "./PLANT3.dts";
+   };
+   new TSStatic() {
+      position = "408.506 531.201 181.775";
+      rotation = "1 0 0 0";
+      scale = "7 7 7";
+      shapeName = "./PLANT5.dts";
+   };
+   new TSStatic() {
+      position = "344.026 340.316 259.105";
+      rotation = "1 0 0 0";
+      scale = "3 3 2.5";
+      shapeName = "./PLANT4.dts";
+   };
+   new TSStatic() {
+      position = "-386.351 -153.831 88.0873";
+      rotation = "1 0 0 0";
+      scale = "11 11 20";
+      shapeName = "./tree8.dts";
+   };
+   new TSStatic() {
+      position = "194.858 28.6169 183.175";
+      rotation = "1 0 0 0";
+      scale = "7 7 7";
+      shapeName = "./PLANT3.dts";
+   };
+   new TSStatic() {
+      position = "-59.5521 137.849 182.765";
+      rotation = "1 0 0 0";
+      scale = "7 7 7";
+      shapeName = "./PLANT3.dts";
+   };
+   new Trigger(Trigger2) {
+      position = "389.847 516.332 92.8163";
+      rotation = "1 0 0 0";
+      scale = "15 15 1";
+      dataBlock = "StoveTrigger";
+      polyhedron = "0.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 0.0000000 0.0000000 0.0000000 1.0000000";
+   };
+   new TSStatic() {
+      position = "198.063 349.875 87.9893";
+      rotation = "1 0 0 0";
+      scale = "2 2 1";
+      shapeName = "./water.dts";
+   };
+   new PhysicalZone(PhyZone) {
+      position = "206.735 362.654 87.9865";
+      rotation = "0 1 0 180";
+      scale = "18 25 14";
+      velocityMod = "1";
+      gravityMod = "1";
+      extraDrag = "0";
+      isWater = "1";
+      waterViscosity = "40";
+      waterDensity = "1";
+      waterColor = "0.500000 0.500000 0.500000 1.000000";
+      appliedForce = "0 0 0";
+      polyhedron = "0.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 0.0000000 0.0000000 0.0000000 1.0000000";
+   };
+   new TSStatic() {
+      position = "195.162 -45.5781 54.7545";
+      rotation = "1 0 0 0";
+      scale = "7 7 7";
+      shapeName = "./PLANT5.dts";
+   };
+   new TSStatic() {
+      position = "-576.223 1200.68 83.9363";
+      rotation = "0 0 1 90";
+      scale = "11 11 20";
+      shapeName = "./tree8.dts";
+   };
+   new TSStatic() {
+      position = "-570.823 1204.68 85.7363";
+      rotation = "1 0 0 0";
+      scale = "11 11 20";
+      shapeName = "./tree8.dts";
+   };
+   new TSStatic() {
+      position = "136.705 402.409 131.165";
+      rotation = "1 0 0 0";
+      scale = "3 3 2.5";
+      shapeName = "./PLANT4.dts";
+   };
+   new TSStatic() {
+      position = "251.262 254.784 86.1647";
+      rotation = "1 0 0 0";
+      scale = "3 3 2.5";
+      shapeName = "./PLANT4.dts";
+   };
+   new TSStatic() {
+      position = "380.162 -45.5781 54.7545";
+      rotation = "1 0 0 0";
+      scale = "7 7 7";
+      shapeName = "./PLANT5.dts";
+   };
+   new TSStatic() {
+      position = "415.298 192.704 55.0882";
+      rotation = "1 0 0 0";
+      scale = "7 7 7";
+      shapeName = "./PLANT3.dts";
+   };
+   new ParticleEmitterNode() {
+      position = "202.292 350.317 101.8";
+      rotation = "0 1 0 180";
+      scale = "1.002 1.002 0.05";
+      dataBlock = "GenericEmitterNode";
+      emitter = "GSFfaucetEmitter";
+      velocity = "1";
+      pointPlacement = "0";
+      spherePlacement = "0";
+         brick = "18927";
+   };
+   new TSStatic() {
+      position = "372.066 1531.84 85.0041";
+      rotation = "0 0 1 90";
+      scale = "11 11 20";
+      shapeName = "./tree8.dts";
+   };
+   new TSStatic() {
+      position = "377.466 1535.84 86.8041";
+      rotation = "1 0 0 0";
+      scale = "11 11 20";
+      shapeName = "./tree8.dts";
+   };
+   new TSStatic() {
+      position = "130.04 633.523 283.432";
+      rotation = "0 0 1 45";
+      scale = "6.1 6.1 6.1";
+      shapeName = "./gsffan.dts";
+   };
+   new TSStatic() {
+      position = "-69.8034 586.049 155.541";
+      rotation = "0 0 1 45";
+      scale = "6.1 6.1 6.1";
+      shapeName = "./gsffan.dts";
+   };
+};
+//--- OBJECT WRITE END ---
