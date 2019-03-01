@@ -18,7 +18,7 @@
 
 <lmargin%:3><font:Arial Bold:16>Host an Online Game<font:Arial:16><color:FF0000> - This is a little more complicated.<color:000000>
 
-<lmargin%:10><font:Arial Bold:16>1.<font:Arial:16><lmargin%:14>If you are behind a Cable/DSL router you will need to forward some ports.  
+<lmargin%:10><font:Arial Bold:16>1.<font:Arial:16><lmargin%:14>You will need to port forward. 
 
 You will need to forward one port for every user you want to have connected, starting at 28000.  So if you want to host an 8 player server, you will need to forward ports 28000-28007.  
 
@@ -31,8 +31,8 @@ There is an online tutorial for this <a:www.blockland.us/portForward/>HERE</a>
 
 <lmargin%:3><font:Arial Bold:16>Host a Dedicated Server<font:Arial:16><color:FF0000> - Got an extra computer?<color:000000>
 
-<lmargin%:10>If you have a spare computer and enough bandwidth, you can host a dedicated server.  If you want to host a game that is running all the time or one with a lot of people in it, a dedicated server is the best solution.  
+<lmargin%:10>If you have another computer and enough bandwidth, you can host a dedicated server.  If you want to host a game that is running all the time or one with a lot of people in it, a dedicated server is the best solution.  
 
-To start a dedicated server, double click the <color:0000FF>dedicated.bat<color:000000> file in the Blockland directory.  
+To start a dedicated server, double click the <color:0000FF>Launch v20 - Dedicated.bat<color:000000> file in the B4v21 directory.  
 
 The configuration options for the server are contained in the file <color:0000FF>base/server/prefs.cs<color:000000>.  You can edit this file in notepad or any other text editor.  
