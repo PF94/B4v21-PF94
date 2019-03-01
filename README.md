@@ -1,6 +1,5 @@
-# B4v21 (Chaz's varient)
+# B4v21 Community Edition
 Basiclly modified versions of B4v21's v0002, RTB 1.0 and v20.
-This is only for Windows and for non-steam users. Steam and Mac users can find a different download on the B4v21 Website.
 This is the v20 branch.
 
 # Instructions
