@@ -23,7 +23,7 @@ $ORBS::Server = 1;
 //* Variables
 //*********************************************************
 $ORBS::Version = "4.16";
-$ORBS::Path = "Add-Ons/System_oRBs/";
+$ORBS::Path = "Add-Ons/System_RTB4/";
 
 //*********************************************************
 //* Demo Users
@@ -33,7 +33,7 @@ $ORBS::Path = "Add-Ons/System_oRBs/";
 if(!isUnlocked())
 {
    $ORBS::Server = 0;
-   echo("\c2ERROR: ORBS failed to load because you are in demo mode.");
+   echo("\c2ERROR: ORBS failed to load because you are in demo mode. (what in the hell you haven't got the game? lol)");
    return;
 }
 
