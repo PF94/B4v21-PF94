@@ -7,16 +7,16 @@
 <lmargin%:3><font:Arial Bold:16>2. Equip Brick
 <lmargin%:10><font:Arial:16>Press <color:0000FF>1<color:000000> to equip the brick tool.  Use the mouse wheel to switch to different bricks.  If you don't have a mouse wheel, you can use the arrow keys.
 
-<lmargin%:3><font:Arial Bold:16>3. Shoot Ghost Brick
-<lmargin%:10><font:Arial:16>Aim somewhere close and click the left mouse button.  A transparent "ghost" version of the brick should appear.
+<lmargin%:3><font:Arial Bold:16>3. Place Ghost Brick
+<lmargin%:10><font:Arial:16>Aim somewhere close and click the left mouse button.  A ghost of the brick should appear.
 
-<lmargin%:3><font:Arial Bold:16>4. Adjust Ghost Brick
+<lmargin%:3><font:Arial Bold:16>4. Move Ghost Brick
 <lmargin%:10><font:Arial:16>Move the ghost brick into position using the number pad.  <color:0000FF>Numpad +<color:000000> and <color:0000FF>Numpad 5<color:000000> move the ghost brick up and down.
 
 <lmargin%:3><font:Arial Bold:16>5. Plant
 <lmargin%:10><font:Arial:16>Press <color:0000FF>Numpad Enter<color:000000> to plant the brick.  The brick must be either resting on a flat surface, touching the top or bottom of another brick, or be embedded half way into the terrain.  
 
-If a brick cannot be planted, an error message will flash on the screen describing why.	
+If a brick cannot be planted, an image will appear on the screen describing why.	
 
 
-<lmargin%:3>If you make a mistake, press <color:0000FF>CTRL Z<color:000000> to undo the last brick you planted.
+<lmargin%:3>If you make a mistake, press <color:0000FF>CTRL Z<color:000000> to remove the last brick you planted.
