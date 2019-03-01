@@ -1,7 +1,7 @@
-# B4v21
-Various old blockland releases with extra B4v21 addons included.
+# B4v21 (Chaz's varient)
+Basiclly modified versions of B4v21's v0002, RTB 1.0 and v20.
 This is only for Windows and for non-steam users. Steam and Mac users can find a different download on the B4v21 Website.
-This is the v20 branch, check the other branches for the other versions.
+This is the v20 branch.
 
 # Instructions
 1) Click the 'Clone or download' button on this page, and click on 'Download ZIP'
