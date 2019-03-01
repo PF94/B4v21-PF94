@@ -1,3 +1,0 @@
-Title: Blockland Default Colorset
-Author: Eric Hartman
-The default colorset for Blockland

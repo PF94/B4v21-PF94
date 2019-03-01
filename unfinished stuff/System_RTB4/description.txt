@@ -1,3 +1,0 @@
-Title: RTB4 slim
-Author: Chazpelo
-Rebranded version of oRBs that removes a lot of stuff to save space.
