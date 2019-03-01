@@ -17,7 +17,7 @@
 //#
 //#############################################################################
 //Register that this module has been loaded
-$ORBS::Modules::Client::InfoTips = 1;
+$ORBS::Modules::Client::InfoTips = 0;
 
 //*********************************************************
 //* Requirements
@@ -29,70 +29,6 @@ if(!$ORBS::Hooks::InfoTips)
 //* Default Tips
 //*********************************************************
 $ORBS::MCIT::Tips = 0;
-$ORBS::MCIT::Tip[$ORBS::MCIT::Tips++] = "You can clear all of your own bricks by typing <color:FF0000>/clearbricks<color:000000> in the chat box.";
-$ORBS::MCIT::Tip[$ORBS::MCIT::Tips++] = "Right clicking on a brick on the brick menu (the <key:openBSD> key) will close the menu and allow you to build with that brick immediatley.";
-$ORBS::MCIT::Tip[$ORBS::MCIT::Tips++] = "Customize your controls! Press <key:openOptionsWindow> to open the options menu." TAB "Assign commands to your keyboard using the options menu on the main menu!";
-$ORBS::MCIT::Tip[$ORBS::MCIT::Tips++] = "Server administrators, did you know that you can type <color:FF0000>/reloadbricks<color:000000> to load the most recently uploaded save?";
-$ORBS::MCIT::Tip[$ORBS::MCIT::Tips++] = "Server administrators, did you know that you can use the <color:FF0000>/fetch <name><color:000000> and <color:FF0000>/find <name><color:000000> commands to bring or go to players instantly?";
-$ORBS::MCIT::Tip[$ORBS::MCIT::Tips++] = "Save often! Don't let your build get lost!";
-$ORBS::MCIT::Tip[$ORBS::MCIT::Tips++] = "Did you know that you can load saves from other maps? Click the map name on the load menu to pick another map.";
-$ORBS::MCIT::Tip[$ORBS::MCIT::Tips++] = "Press <key:doDofScreenShot> to take a screenshot with depth of field!" TAB "Did you know that you can take depth of field screenshots? Set the key on the options menu.";
-$ORBS::MCIT::Tip[$ORBS::MCIT::Tips++] = "Press <key:showPlayerList> to bring up the player trust box." TAB "It looks like you can't open the player menu! Open the options menu and assign a key to it!";
-$ORBS::MCIT::Tip[$ORBS::MCIT::Tips++] = "Transparent bricks are weaker than normal bricks in a mini-game.";
-$ORBS::MCIT::Tip[$ORBS::MCIT::Tips++] = "Lights on a 1x1 flat brick or cylinder can be broken with a shot from the pistol.";
-$ORBS::MCIT::Tip[$ORBS::MCIT::Tips++] = "Holding a tool or brick will reveal invisible bricks.";
-$ORBS::MCIT::Tip[$ORBS::MCIT::Tips++] = "You can choose to play as different types of players when you create a mini-game!";
-$ORBS::MCIT::Tip[$ORBS::MCIT::Tips++] = "Did you know you can tap the <key:toggleSuperShift> key to enable Super Shift when moving bricks?" TAB "If you set the Toggle Super Shift control, you can super shift bricks when you move them!";
-$ORBS::MCIT::Tip[$ORBS::MCIT::Tips++] = "If you get stuck somewhere, you can use <key:Suicide> to kill yourself and respawn!" TAB "If you get stuck somewhere, you can type <color:FF0000>/suicide<color:000000> to kill yourself and respawn!";
-$ORBS::MCIT::Tip[$ORBS::MCIT::Tips++] = "You can remove your temp brick by pressing the <key:cancelBrick> key.";
-$ORBS::MCIT::Tip[$ORBS::MCIT::Tips++] = "If you make a mistake, you can press <key:undoBrick> to undo it." TAB "If you set the Undo Brick control, you will be able to reverse any mistakes you make!";
-$ORBS::MCIT::Tip[$ORBS::MCIT::Tips++] = "If you find yourself in a dark room, press <key:useLight> to toggle your personal light!" TAB "If you find yourself in a dark room, type <color:FF0000>/light<color:000000> to toggle your personal light!";
-$ORBS::MCIT::Tip[$ORBS::MCIT::Tips++] = "Did you know that you can whisper to people in the same minigame as you by using the <key:TeamChat> key?";
-$ORBS::MCIT::Tip[$ORBS::MCIT::Tips++] = "Did you know that if you jump and jet at the same time, you'll fly faster?";
-$ORBS::MCIT::Tip[$ORBS::MCIT::Tips++] = "Did you know that you can push a vehicle if you click on it without holding any tools?";
-$ORBS::MCIT::Tip[$ORBS::MCIT::Tips++] = "Did you know that you can swap bricks around in your cart by clicking on one slot, and then another?";
-$ORBS::MCIT::Tip[$ORBS::MCIT::Tips++] = "You can press <key:ToggleBuildMacroRecording> to start recording the bricks you place!";
-$ORBS::MCIT::Tip[$ORBS::MCIT::Tips++] = "You can get a special wand tool by typing <color:FF0000>/wand<color:000000> which can destroy any of your bricks!";
-$ORBS::MCIT::Tip[$ORBS::MCIT::Tips++] = "Did you know that you can press a letter on your keyboard when you are setting a brick's print, instead of selecting it?";
-$ORBS::MCIT::Tip[$ORBS::MCIT::Tips++] = "You can express your emotions in Blockland by typing <color:FF0000>/love<color:000000>, <color:FF0000>/hate<color:000000> and <color:FF0000>/hug<color:000000> in the chat box!";
-$ORBS::MCIT::Tip[$ORBS::MCIT::Tips++] = "Did you know you can get a friends' attention by typing <color:FF0000>/alarm<color:000000> in the chat box?";
-$ORBS::MCIT::Tip[$ORBS::MCIT::Tips++] = "Did you know that many of the maps on Blockland have secret passages and building areas?";
-$ORBS::MCIT::Tip[$ORBS::MCIT::Tips++] = "Did you know that you can press <key:showPlayerList> to show a list of players in the server?";
-$ORBS::MCIT::Tip[$ORBS::MCIT::Tips++] = "Did you know you can scroll your mousewheel when zooming in to adjust the zoom level?";
-$ORBS::MCIT::Tip[$ORBS::MCIT::Tips++] = "Server administrators, did you know that you can look at a location and type <color:FF0000>/warp<color:000000> to teleport there?";
-$ORBS::MCIT::Tip[$ORBS::MCIT::Tips++] = "Did you know that you can throw your current item away by pressing <key:dropTool>?" TAB "If you set the Drop Tool control, you'll be able to drop the tool that you're holding!";
-$ORBS::MCIT::Tip[$ORBS::MCIT::Tips++] = "Did you know that you can use the jeep to perform stunts made from bricks?";
-$ORBS::MCIT::Tip[$ORBS::MCIT::Tips++] = "Did you know that you can walk or drive slower by holding the <key:Walk> key?" TAB "You can walk and drive slower by setting the Walk control in your options.";
-$ORBS::MCIT::Tip[$ORBS::MCIT::Tips++] = "Did you know that you can switch seats in a vehicle by pressing the <key:NextSeat> key?" TAB "You can switch seats in the vehicle you're in by setting the Next and Previous Seat controls in your options!";
-$ORBS::MCIT::Tip[$ORBS::MCIT::Tips++] = "Server administrators, did you know that you can press <key:DropCameraAtPlayer> to go into Fly Mode?";
-$ORBS::MCIT::Tip[$ORBS::MCIT::Tips++] = "You will need your friends' <color:FF0000>Build Trust<color:000000> in order to build on their bricks.";
-$ORBS::MCIT::Tip[$ORBS::MCIT::Tips++] = "You will need your friends' <color:FF0000>Full Trust<color:000000> in order to spray or hammer their bricks.";
-$ORBS::MCIT::Tip[$ORBS::MCIT::Tips++] = "Did you know that certain weapons can destroy bricks in Mini-games?";
-$ORBS::MCIT::Tip[$ORBS::MCIT::Tips++] = "Did you know that the clocks in the Bedroom and Kitchen show how long the server has been running in hours and minutes?";
-$ORBS::MCIT::Tip[$ORBS::MCIT::Tips++] = "Did you know that you can place water bricks from the Baseplates category which simulate being in water?";
-$ORBS::MCIT::Tip[$ORBS::MCIT::Tips++] = "Server administrators, did you know you can type <color:FF0000>/timescale number<color:000000> (with a number between 0.2 and 2) to put the game into slow-motion or high-speed?";
-$ORBS::MCIT::Tip[$ORBS::MCIT::Tips++] = "You can switch between 1st and 3rd person by pressing the <key:toggleFirstPerson> key." TAB "You can switch between 1st and 3rd person by setting the Toggle First Person control!";
-$ORBS::MCIT::Tip[$ORBS::MCIT::Tips++] = "You can find out how many bricks are on the server by typing <color:FF0000>/brickcount<color:000000>";
-$ORBS::MCIT::Tip[$ORBS::MCIT::Tips++] = "You can take a screenshot by pressing <key:doScreenShot>" TAB "You'll be able to take screenshots if you set the Screenshot key in your controls!";
-$ORBS::MCIT::Tip[$ORBS::MCIT::Tips++] = "You can look at previous chats by pressing <key:PageUpNewChatHud> and <key:PageDownNewChatHud>";
-$ORBS::MCIT::Tip[$ORBS::MCIT::Tips++] = "You can hold the <key:Crouch> key to dive when in water." TAB "Set your crouch key to allow you to dive in water!";
-$ORBS::MCIT::Tip[$ORBS::MCIT::Tips++] = "Did you know that a person's Blockland ID (BL ID) is unique to them only?";
-$ORBS::MCIT::Tip[$ORBS::MCIT::Tips++] = "Did you know that you can type <color:FF0000>/zombie<color:000000> to raise your hands infront of you like a zombie?";
-$ORBS::MCIT::Tip[$ORBS::MCIT::Tips++] = "Do you know what happens when the clock in the Bedroom reaches 99:59? I do, but I won't tell!";
-$ORBS::MCIT::Tip[$ORBS::MCIT::Tips++] = "Did you know that you can press <color:FF0000>tab<color:000000> when in the Brick Selector to switch categories?";
-$ORBS::MCIT::Tip[$ORBS::MCIT::Tips++] = "Did you know that if you spray someone with your paint can, they will temporarily turn the color of your paint can?";
-$ORBS::MCIT::Tip[$ORBS::MCIT::Tips++] = "Did you know that the Hammer can be used as a melee weapon in a mini-game?";
-$ORBS::MCIT::Tip[$ORBS::MCIT::Tips++] = "Did you know that you can flip a vehicle by hitting it with the hammer?";
-$ORBS::MCIT::Tip[$ORBS::MCIT::Tips++] = "Did you know that the Rocket Launcher can be used to get to high places by shooting a rocket at your feet as you jump?";
-$ORBS::MCIT::Tip[$ORBS::MCIT::Tips++] = "Did you know that setting the output event disappear to -1 will cause a brick to disappear forever! Setting disappear to 0 will make it reappear again.";
-$ORBS::MCIT::Tip[$ORBS::MCIT::Tips++] = "Did you know that turning raycasting off of a brick will cause bullets to travel straight through it?";
-$ORBS::MCIT::Tip[$ORBS::MCIT::Tips++] = "Did you know that turning collision off of a brick will let you walk through it?";
-$ORBS::MCIT::Tip[$ORBS::MCIT::Tips++] = "Did you know that turning rendering off of a brick will make it invisible?";
-$ORBS::MCIT::Tip[$ORBS::MCIT::Tips++] = "Did you know that the delay time of an event is measured in milliseconds? Although it may be inaccurate sometimes if the server is lagging!";
-$ORBS::MCIT::Tip[$ORBS::MCIT::Tips++] = "Did you know that you can change between WASD steering and mouse steering for vehicles on the Advanced Configuration section of the options menu?";
-$ORBS::MCIT::Tip[$ORBS::MCIT::Tips++] = "Did you know that you can double-click a person's name in the IRC to have a private chat with them?";
-$ORBS::MCIT::Tip[$ORBS::MCIT::Tips++] = "Did you know you can type /me to perform an action in the IRC? For example /me gives a tip would be *Infomaniac gives a tip.";
-$ORBS::MCIT::Tip[$ORBS::MCIT::Tips++] = "Did you know that you can open the ORBS Server Control using <key:ORBSSC_ToggleSC>?" TAB "Did you know that you can bind the Server Control window to a key in your Controls?";
 $ORBS::MCIT::ORBSTips = $ORBS::MCIT::Tips;
 
 //*********************************************************

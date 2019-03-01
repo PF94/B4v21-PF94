@@ -32,7 +32,7 @@ $ORBS::Debug = 0;
 //* Variables
 //*********************************************************
 $ORBS::Version = "4.16";
-$ORBS::Path = "Add-Ons/System_oRBs/";
+$ORBS::Path = "Add-Ons/System_RTB4/";
 
 //*********************************************************
 //* Demo Users
@@ -42,7 +42,7 @@ $ORBS::Path = "Add-Ons/System_oRBs/";
 if(!isUnlocked())
 {
    $ORBS::Client = 0;
-   echo("\c2ERROR: ORBS failed to load because you are in demo mode.");
+   echo("\c2ERROR: ORBS failed to load because you are in demo mode. (what in the hell)");
    return;
 }
 
@@ -67,7 +67,7 @@ if(isFile("config/server/ADD_ON_LIST.cs"))
    exec("config/server/ADD_ON_LIST.cs");
 else
    exec("base/server/defaultAddonList.cs");
-$AddOn__System_oRBs = 1;
+$AddOn__System_RTB4 = 1;
 export("$AddOn__*","config/server/ADD_ON_LIST.cs");
 
 //*********************************************************

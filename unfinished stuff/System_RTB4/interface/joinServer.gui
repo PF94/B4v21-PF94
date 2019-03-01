@@ -118,7 +118,7 @@ new GuiWindowCtrl(ORBSJS_window) {
             lineSpacing = "2";
             allowColorChars = "1";
             maxChars = "-1";
-            text = "<just:center>Internet play not available in demo.";
+            text = "<just:center>You cannot use Kenko's Master Server on demo.";
             maxBitmapHeight = "-1";
             selectable = "1";
          };
