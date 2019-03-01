@@ -2,7 +2,7 @@
 new SimGroup(MissionGroup) {
 
    new ScriptObject(MissionInfo) {
-         name = "Bedroom";
+         name = "Bedroom Community";
          saveName = "Bedroom";
    };
    new MissionArea(MissionArea) {
