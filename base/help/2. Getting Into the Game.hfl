@@ -35,4 +35,4 @@ There is an online tutorial for this <a:www.blockland.us/portForward/>HERE</a>
 
 To start a dedicated server, double click the <color:0000FF>Launch v20 - Dedicated.bat<color:000000> file in the B4v21 directory.  
 
-The configuration options for the server are contained in the file <color:0000FF>base/server/prefs.cs<color:000000>.  You can edit this file in notepad or any other text editor.  
+The configuration options for the server are contained in the file <color:0000FF>base/server/prefs.cs<color:000000>.  You can edit this file on a text editor or more recommended, Return To Blockland's user friendly Server manager.
