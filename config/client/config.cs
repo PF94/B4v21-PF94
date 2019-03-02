@@ -68,6 +68,7 @@ moveMap.bind(keyboard, "alt numpad6", superShiftBrickRightProxy);
 moveMap.bind(keyboard, "alt +", superShiftBrickUpProxy);
 moveMap.bind(keyboard, "alt numpad5", superShiftBrickDownProxy);
 moveMap.bind(keyboard, "ctrl e", invLeft);
+moveMap.bind(keyboard, "lcontrol", ndInputMultiSelect);
 moveMap.bind(mouse0, "xaxis", yaw);
 moveMap.bind(mouse0, "yaxis", pitch);
 moveMap.bind(mouse0, "button0", mouseFire);
