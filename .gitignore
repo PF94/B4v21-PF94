@@ -4,3 +4,4 @@ cache.db.journal
 console.log
 key.dat
 config/client/prefs.cs
+config/client/rtb/prefs.cs
