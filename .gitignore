@@ -5,3 +5,4 @@ console.log
 key.dat
 config/client/prefs.cs
 config/client/rtb/prefs.cs
+config/client/prefs.cs
