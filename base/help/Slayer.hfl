@@ -1,0 +1,202 @@
+<tag:0><just:center><h1><color:aa0000>Welcome to Slayer!</color></h1></just>
+<br>
+This is your quick-stop for help information, but if you run into a problem that isn't solved by reading this please ask for help <a:forum.blockland.us/index.php?topic=170322.0>here</a>.<br>
+<br>
+<b>Please <a:bitbucket.org/Greek2me/slayer/issues/new>click here</a> to report any bugs you find.</b><br>
+<br>
+<br>
+<br>
+<br>
+<h2><color:aa0000>Table of Contents</color></h2>
+<ol>
+	<li><a:#1>Getting Started</a></li>
+	<li><a:#2>Teams</a></li>
+	<li><a:#3>Gamemodes</a></li>
+	<li><a:#50>Bots & AI</a></li>
+	<li><a:#4>VCE Variables</a></li>
+	<li><a:#5>Advanced Configuration</a></li>
+	<li><a:#6>The Slayer GUI</a></li>
+	<li><a:#7>Fly-Through Camera</a></li>
+</ol><br>
+<br><br><br><br><br><br>
+<ol>
+	<li>
+		<tag:1><h3><color:aa0000>Getting Started</color></h3>
+		Congratulations, you've opened the Slayer window and are almost ready to start your first minigame! All you have to do is click on one of the tabs on the left (General, Teams, or Advanced) and change the settings that you need. When you're ready to start the minigame, click the Create button (bottom right corner).<br>
+		<br>
+		Now that you've started your first minigame, you might want to come back and edit some settings later. To do this, simply open the setup window in the exact same way that you created the minigame.<br>
+		<br>
+		<just:right><a:#0><b>Back to top</b></a></just>
+	</li>
+	<br>
+	<li>
+		<tag:2><h3><color:aa0000>Teams</color></h3>
+		Teams are a major part of many Slayer gamemodes. This is a brief summary of how to use them.<br>
+		<br>
+		<b>Creating & Editing Teams</b><br>
+		<ol>
+			<li>Open the Slayer window.</li>
+			<li>Click on the "Teams" tab.
+				<size:12><ul><li>Note: You must be running a team-enabled gamemode, for example, <i>Team Slayer</i>.</li></ul></size></li>
+			<li>Click on the "New" button to make a new team or a team in the list to edit one.</li>
+			<li>Edit the settings for your team.
+				<size:12><ul><li>Note: Additional settings can be found by clicking the "Advanced" button.</li></ul></size></li>
+			<li>Click on "OK" or Update/Reset/Create.</li>
+		</ol><br>
+		<br>
+		<b>Team Spawns & Bricks</b><br>
+		Creating team spawn points and using other team bricks is quite easy.<br>
+		<ol>
+			<li>Create your teams (see above).</li>
+			<li>Open the Brick Menu.</li>
+			<li>Go to the "Slayer" tab of the Brick Menu.</li>
+			<li>Select the brick you want to use. We will use the "Team Spawn Point".</li>
+			<li>Plant the brick.</li>
+			<li>Paint the brick the <i>exact same color</i> as the color of the team you want to use it.</li>
+		</ol><br>
+		<br>
+		The above steps can be used for any team brick. <b>To make a brick neutral</b>, paint it a color that is not in use by any team.<br>
+		<br>
+		<b>Team Events</b><br>
+		Team events are fairly straightforward and use a team number system. They are only called when a player from a specific team activates them.<br>
+		<br>
+		Team events look like this: <b>onActivate(Team3)</b><br>
+		To find a team's number, simply count down the team list (starting at 1) until you reach that team. There are events for up to six teams by default, but this can be increased in the "Advanced" tab of the Slayer window.<br>
+		<br>
+		<b>Team Shuffle</b><br>
+		Team Shuffle is a setting that causes teams to be mixed up when the minigame is reset. There are two Team Shuffle modes:<br>
+		<ul>
+			<li><b>Random:</b> This is the default setting. This results in teams having different members every time, but some members will remain on their original team. (recommended for games with two teams)</li>
+			<li><b>New Team Every Time:</b> As the name suggests, this ensures that every player will be on a different team than their original one. However, with only two teams, this results in teams having the same players.</li>
+		</ul><br>
+		<br>
+		<just:right><a:#0><b>Back to top</b></a></just>
+	</li>
+	<br>
+	<li>
+		<tag:3><h3><color:aa0000>Gamemodes</color></h3>
+		Gamemodes are add-ons that can completely change the game-play of your minigames. Some examples are <i>Capture the Flag</i>, <i>Bounty Hunter</i>, and <i>Search & Destroy</i>. There are many more available for download.<br>
+		<br>
+		<b>Gamemodes must be downloaded separately from Slayer.</b><br>
+		<a:bitbucket.org/Greek2me/slayer/downloads>Click here to download most Slayer gamemodes.</a>
+		<br>
+		<just:right><a:#0><b>Back to top</b></a></just>
+	</li>
+	<br>
+	<li>
+		<tag:50><h3><color:aa0000>Bots & AI</color></h3>
+		Slayer is capable of adding AI-controlled players to teams using the <b>Preferred Players</b> team setting.<br>
+		<br>
+		To use this feature, go to the team panel. You will see an option called "Preferred Players." Set this number to ensure that the team always has at least that many players. For example, if you set it to 10, but the team only has 4 human players, Slayer will add 6 AI-controlled bots to the team.
+		<br>
+		<just:right><a:#0><b>Back to top</b></a></just>
+	</li>
+	<br>
+	<li>
+		<tag:4><h3><color:aa0000>VCE Variables</color></h3>
+		Slayer comes with many special variables for use with <a:mods.greek2me.us/storage/Event_Variables.zip>Variable Conditional Events</a>. This is a basic list of them.<br>
+		<ul>
+			<li><b><var:cl:lives></b> Gives the player's remaining lives.</li>
+			<li><b><var:cl:kills></b></li>
+			<li><b><var:cl:deaths></b></li>
+			<li><b><var:cl:team></b> Player's team number.</li>
+			<li><b><var:cl:teamName></b> Player's team name.</li>
+			<li><b><var:cl:teamNameColored></b> Player's team name, colored the team color.</li>
+			<li><b><var:cl:teamColor></b> Player's team color. Use in place of a color code like <color:ff00ff ></li>
+			<li><b><var:cl:teamScore></b></li>
+			<li><b><var:cl:teamMembers></b> Number of players on the team.</li>
+			<li><b><var:br:teamName></b> The team (or teams) in control of the brick.</li>
+			<li><b><var:br:teamNameColored></b> Same as above, but colored team colors.</li>
+			<li><b><var:mg:teamScore[1-6]></b> The team score for team X.</li>
+			<li><b><var:mg:teamMembers[1-6]></b> The number of players on team X.</li>
+			<li><b><var:mg:teamLiving[1-6]></b> The number alive on team X.</li>
+			<li><b><var:mg:teamSpawned[1-6]></b> The number of players on team X that have currently spawned.</li>
+			<li><b><var:mg:teamKills[1-6]></b> The number of kills by team X.</li>
+			<li><b><var:mg:teamDeaths[1-6]></b> The number of deaths by team X.</li>
+			<li><b><var:mg:teamIsDead[1-6]></b> Whether team X is eliminated.</li>
+			<li><b><var:mg:teamCount></b> The total number of teams.</li>
+			<li><b><var:mg:gamemode></b> The fName of the gamemode.</li>
+			<li><b><var:mg:resetting></b> Whether the round is resetting.</li>
+			<li><b><var:mg:useTeams></b> Whether the gamemode allows teams.</li>
+			<li><b><var:mg:lives></b> The minigame starting lives.</li>
+			<li><b><var:mg:points></b> Number of points to win.</li>
+			<li><b><var:mg:time></b> Total time to win.</li>
+			<li><b><var:mg:numLiving></b> Number of players still alive.</li>
+			<li><b><var:mg:numSpawned></b> Number of players that are currently spawned.</li>
+			<li><b><var:mg:numMembers></b> Total number of players.</li>
+		</ul><br>
+		<br>
+		<just:right><a:#0><b>Back to top</b></a></just>
+	</li>
+	<br>
+	<li>
+		<tag:5><h3><color:aa0000>Advanced Configuration</color></h3>
+		Sometimes you need to tweak your minigame settings to your exact needs, but you can't find an option for what you need. In that case, the advanced options tab is your best friend.<br>
+		<br>
+		To edit the advanced options:<br>
+		<ol>
+			<li>Open the Slayer window.</li>
+			<li>Click on the "Advanced" tab.</li>
+			<li>Find the setting that you want to change and click on it.</li>
+			<li>Change the setting using the controls at the bottom of the scroll box.</li>
+			<li>Click "Apply" and then click Create/Update/Reset.</li>
+		</ol><br>
+		<br>
+		<just:right><a:#0><b>Back to top</b></a></just>
+	</li>
+	<br>
+	<li>
+		<tag:6><h3><color:aa0000>The Slayer GUI</color></h3>
+		The Slayer GUI contains plenty of shortcuts and tricks that make it easier to use.<br>
+		<br>
+		<b>Opening the GUI</b><br>
+		There are several ways to open the Slayer GUI.<br>
+		<ul>
+			<li><b>Minigame Menu</b> Simply click on the "Create" or Edit" button in the Join Minigame Menu (find this in the escape menu).</li>
+			<li><b>Keybind</b> To use this, you need to bind a key in the Blockland "Options" menu, under the "Controls" tab.</li>
+			<li><b>Chat Command</b> Simply type <b>/Slayer Edit</b> in chat.</li>
+		</ul><br>
+		<br>
+		<just:right><a:#0><b>Back to top</b></a></just>
+	</li>
+	<br>
+	<li>
+		<tag:7><h3><color:aa0000>Fly-Through Camera</color></h3>
+		Slayer allows you to create a camera fly-through that can be played automatically at the beginning of the round or manually with events.<br>
+		<br>
+		<b>Creating the Fly-Through Camera</b><br>
+		<ol>
+			<li>Move the camera to where you want the fly-through camera to start.</li>
+			<li>Type <b>/createFlyCam</b> in chat.</li>
+			<li>Add knots to the camera path.</li>
+		</ol><br>
+		<br>
+		<b>Adding Knots to the Path</b><br>
+		<ol>
+			<li>After creating the flycam or setting a knot, move the camera to the location (and point in the correct direction) of the next knot.</li>
+			<li>Type <b>/setKnot</b> in chat. (See below for advanced knot options.)</li>
+		</ol><br>
+		<br>
+		If desired, knots can be configured with advanced options. Instead of typing /setKnot, type <b>/setKnot [speed] [type] [path]</b>.<br>
+		<ul>
+			<li><b>Speed:</b> [integer | 0-100] This is the speed of the camera as it travels to the next knot. (default is 7)</li>
+			<li><b>Type:</b> [string | Normal, Kink, Position] Normal turns the camera smoothly, kink rotates the camera to face the next knot immediately, and position does not rotate the camera. (default is Normal)</li>
+			<li><b>Path:</b> [string | Spline, Linear] Spline makes the path smoother, while linear goes straight to the next knot. (default is Spline)</li>
+		</ul><br>
+		<br>
+		<b>Jumps</b><br>
+		To switch from one viewing angle to another, use a camera jump. To do this, follow the directions for setting knots, but use the <b>/setJump</b> command instead.<br>
+		<br>
+		<b>Testing the Fly-Through</b><br>
+		To see if your fly-through camera is working as desired, you can type <b>/testFlyCam</b>.<br>
+		<br>
+		<b>Removing the Fly-Through Camera</b><br>
+		Type <b>/deleteFlyCam</b> to remove the fly-through camera.
+		<br>
+		<just:right><a:#0><b>Back to top</b></a></just>
+	</li>
+</ol><br>
+<br>
+<just:center>Created by Greek2me<br>
+Contact:<br>
+<a:forum.blockland.us/index.php?action=pm;sa=send;u=22331>Blockland Forums</a> | <a:scatteredspace.com/forum/index.php?action=pm;sa=send;u=245>ScatteredSpace Forums</a> | <a:greek2me.us>Website</a><br></just>
